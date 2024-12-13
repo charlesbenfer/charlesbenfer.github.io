@@ -2,7 +2,7 @@
 layout: post
 title: Influencing Pitcher Improvement and Transfer Portal Acquisitons
 subtitle: Predictive Modeling for advanced Pitcher Metrics  
-cover-img: ../chase.jpeg
+cover-img: ../assets/plainsman.jpeg
 thumbnail-img: ../chase.jpeg
 share-img:
 tags: Sports Analytics, Baseball, Pitching, Machine Learning
