@@ -1,4 +1,4 @@
-# Curriculum Vitae
+# Background 
  
 A data scientist passionate about sports analytics and prediction. Vast experience in mathematics, data science, statistics, machine learning and artificial intelligence, combined with a trained ability to present and explain results through years of education experience from the middle school level to senior level mathematics.
 
