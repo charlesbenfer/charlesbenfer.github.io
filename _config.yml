@@ -20,7 +20,7 @@ author: Charles Benfer
 ###############################################
 
 navbar-links:
-  About Me: "Data Scientist, Statistician, Educator"
+  About Me: "https://charlesbenfer.github.io/aboutme"
   Resources:
     - Beautiful Jekyll: "https://beautifuljekyll.com"
     - Learn markdown: "https://www.markdowntutorial.com/"
