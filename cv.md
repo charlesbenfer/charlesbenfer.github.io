@@ -1,6 +1,5 @@
-# Timeline Page
-
-## Introduction
+#Curriculum Vitae
+ 
 A data scientist passionate about sports analytics and prediction. Vast experience in mathematics, data science, statistics, machine learning and artificial intelligence, combined with a trained ability to present and explain results through years of education experience from the middle school level to senior level mathematics.
 
 ---
@@ -25,5 +24,5 @@ Accepted to the Auburn University Ph.D. program fully supported as a TA. In my 3
 
 ---
 
-## Conclusion
-This section wraps up the timeline and can include reflections, next steps, or additional information to conclude the page.
+## Full CV
+You can view my full CV [here](https://charlesbenfer.github.io/cv.pdf)
