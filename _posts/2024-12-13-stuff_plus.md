@@ -19,17 +19,14 @@ This year I was given the opportunity by a friend and colleague of mine to join 
 
 At this stage in the project, the team has focused on generating a Stuff+ metric. Though Stuff+ takes on several definitions and nuances, our Stuff+ metric quantifies a pitcher's ability to produce a swing and a miss on any given pitch. Using some predictive modeling, we can quantify a specific pitch's % chance for a whiff, and compare it to the league average chance for a whiff. This definition has seen use in the past, the team encountered it first from Kai Franke's article found [here](https://medium.com/@kaifranke3/building-a-stuff-model-using-xgboost-8c548fbab8f2), a source of inspiration for some of out methods. There are other definitions for "stuff", and these metrics will be explored at a later date, but this blog focuses solely on a pitcher's ability to get whiffs.
 
-The data used for this project is the main difference between our results and the results shown in most other article. As stated in the first paragraph, the main motivation lies in understanding how a pitcher will translate to SEC play. To this end, the data considered involves only SEC pitchers. Specifically, the team was provided with the Trackman pitch data from SEC games in the 2020 to 2024 seasons. The data was filtered down to only contain pitch characteristics, such as spin rate, velocity, etc. (All variables with descriptions can be found [here](https://support.trackmanbaseball.com/hc/en-us/articles/5089413493787-V3-FAQs-Radar-Measurement-Glossary-Of-Terms)). From this data, several features were engineered, including the differences in speed, spin, and movement from the pitcher's primary fastball. It was also important for us to understand how a guy's specific pitch matched up against that specific pitch in the SEC. To this end, models were built for individual pitches: 
-    - Fastballs
-        - Four Seams
-        - Cutters
-        - Sinkers (includes two-seams)
-    - Off Speeds
-        - Changeups
-        - Splitters
-    - Breaking Balls
-        - Curveballs
-        - Sliders
+The data used for this project is the main difference between our results and the results shown in most other article. As stated in the first paragraph, the main motivation lies in understanding how a pitcher will translate to SEC play. To this end, the data considered involves only SEC pitchers. Specifically, the team was provided with the Trackman pitch data from SEC games in the 2020 to 2024 seasons. The data was filtered down to only contain pitch characteristics, such as spin rate, velocity, etc. (All variables with descriptions can be found [here](https://support.trackmanbaseball.com/hc/en-us/articles/5089413493787-V3-FAQs-Radar-Measurement-Glossary-Of-Terms)). From this data, several features were engineered, including the differences in speed, spin, and movement from the pitcher's primary fastball. It was also important for us to understand how a guy's specific pitch matched up against that specific pitch in the SEC. To this end, models were built for individual pitches:  
+- Four Seams
+- Cutters
+- Sinkers (includes two-seams)
+- Changeups
+- Splitters
+- Curveballs
+- Sliders
 
 Any other pitches (Knuckleballs, etc.) were removed from the data set before training, as their sample sizes were too low.        
 
