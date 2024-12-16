@@ -40,5 +40,5 @@ This data set is imbalanced by nature, only about 10% of the pitches resulting i
 
 As described earlier, Stuff+ measures how well a pitcher induces whiffs compared to the average pitcher. The statistic should be normally distributed around 100, meaning a pitcher with a stuff+ for a given pitch equal to 100 indicates that that pitch is predictd to induce whiffs at an SEC average rate, 115 indicates a pitch that is predicted to induce whiffs 15% better than the average pitch, and 80 indicates a pitch that is predicted to induce whiffs 20% worse than the average pitch.  
 
-
+![Changeup Model Feature Importance](changeup_feature_importance.png)
 
