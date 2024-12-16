@@ -32,6 +32,13 @@ Any other pitches (e.g. Knuckleballs) were removed from the data set before trai
 
 ### Models
 
-Up to this point, the main results that will be presented were generated using the XGBoost Classifier in Python. The hyperparameters were selected using Bayesian Hyperparameter Tuning, a method that attempts to build a function from the parameter space of the XGBoost model to model performance.         
+Up to this point, the main results that will be presented were generated using the XGBoost Classifier in Python. The hyperparameters were selected using Bayesian Hyperparameter Tuning, a method that attempts to build a function from the parameter space of the XGBoost model to model performance. Specifically, the models were trained to achieve the best F1 score, the harmonic mean of precision and recall. Maximizing this performance on the training set seemed to have the best overall performance in the validation sets across the board. The data was split 70-30 into training and evaluation sets. 
+
+This data set is imbalanced by nature, only about 10% of the pitches resulting in whiffs. Early iterations of the models performed very poorly due to this, even after tuning XGBoost, a classifier that normally works well on its own on imbalanced data. To further mitigate the imbalanced nature, synthetic minority oversampling (SMOTE) was used to generate more minorty class points (in this case, whiffs) in the training set. No synthetic points were added to the evaluation set. This method produced the best results in terms of classificaiton metrics, and the presented results stem from this methodology.
+
+## Stuff+ Characteristics
+
+As described earlier, Stuff+ measures how well a pitcher induces whiffs compared to the average pitcher. The statistic should be normally distributed around 100, meaning a pitcher with a stuff+ for a given pitch equal to 100 indicates that that pitch is predictd to induce whiffs at an SEC average rate, 115 indicates a pitch that is predicted to induce whiffs 15% better than the average pitch, and 80 indicates a pitch that is predicted to induce whiffs 20% worse than the average pitch.  
+
 
 
