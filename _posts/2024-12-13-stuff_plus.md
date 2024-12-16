@@ -28,6 +28,10 @@ The data used for this project is the main difference between our results and th
 - Curveballs
 - Sliders
 
-Any other pitches (Knuckleballs, etc.) were removed from the data set before training, as their sample sizes were too low.        
+Any other pitches (e.g. Knuckleballs) were removed from the data set before training, as their sample sizes were too low. 
+
+### Models
+
+Up to this point, the main results that will be presented were generated using the XGBoost Classifier in Python. The hyperparameters were selected using Bayesian Hyperparameter Tuning, a method that attempts to build a function from the parameter space of the XGBoost model to model performance.         
 
 
