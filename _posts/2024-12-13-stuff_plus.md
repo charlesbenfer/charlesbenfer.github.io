@@ -1,6 +1,6 @@
 ---
 layout: post
-title:(Work in progress)  Influencing Pitcher Improvement and Transfer Portal Acquisitons
+title: (Work in progress)  Influencing Pitcher Improvement and Transfer Portal Acquisitons
 subtitle: Predictive Modeling for advanced Pitcher Metrics  
 cover-img: ../plainsman.jpeg
 thumbnail-img: ../chase.jpeg
