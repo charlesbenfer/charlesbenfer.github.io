@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Predicting the Phenotypic Properties of Zea Mays (Field Corn) Using Genetic and Environmental Predictors
+title: (Work in Progress) Predicting the Phenotypic Properties of Zea Mays (Field Corn) Using Genetic and Environmental Predictors
 subtitle: Master's Capstone Project
 tags: Machine-Learning, Prediction, Breeding
 comments: true
