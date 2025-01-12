@@ -38,7 +38,13 @@ This data set is imbalanced by nature, only about 10% of the pitches resulting i
 
 ## Stuff+ Characteristics
 
-As described earlier, Stuff+ measures how well a pitcher induces whiffs compared to the average pitcher. This statistic is scaled to a distribution with a mean of 100 and a standard deviation of 10 for interpretability. The statistic is measured for each pitch thrown, and the average is reported for each player. This results in normality as the number of pitches increases which leads to the desired interpretation: a Stuff+ of 100 is league average, a Stuff+ of 110 (one SD above the mean) represents a pitch that is    
+As described earlier, Stuff+ measures how well a pitcher induces whiffs compared to the average pitcher. This statistic is scaled to a distribution with a mean of 100 and a standard deviation of 10 for interpretability. The statistic is measured for each pitch thrown, and the average is reported for each player. This results in normality as the number of pitches increases which leads to the desired interpretation: a Stuff+ of 100 is league average, a Stuff+ of 110 (one SD above the mean) represents a pitch that is as good or better than about 84% of all pitches of that type, where a Stuff+ of 90 (one SD below the mean) represents a pitch that is only as good or better than about 16% of the pitches of that type.     
 
 ![Normal Distribution Empirical Rule](../empirical_rule.png)
+
+
+## Project Applications
+
+While the model building process of this project was great, the more important part lies in the applications and in how the Auburn pitching staff can utilize the information to improve their performance. 
+
 
