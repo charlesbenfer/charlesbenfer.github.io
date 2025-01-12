@@ -38,7 +38,7 @@ This data set is imbalanced by nature, only about 10% of the pitches resulting i
 
 ## Stuff+ Characteristics
 
-As described earlier, Stuff+ measures how well a pitcher induces whiffs compared to the average pitcher. The statistic should be normally distributed around 100, meaning a pitcher with a stuff+ for a given pitch equal to 100 indicates that that pitch is predictd to induce whiffs at an SEC average rate, 115 indicates a pitch that is predicted to induce whiffs 15% better than the average pitch, and 80 indicates a pitch that is predicted to induce whiffs 20% worse than the average pitch.  
+As described earlier, Stuff+ measures how well a pitcher induces whiffs compared to the average pitcher. This statistic is scaled to a distribution with a mean of 100 and a standard deviation of 10 for interpretability. The statistic is measured for each pitch thrown, and the average is reported for each player. This results in normality as the number of pitches increases which leads to the desired interpretation: a Stuff+ of 100 is league average, a Stuff+ of 110 (one SD above the mean) represents a pitch that is    
 
-![Stuff+ Pitch Distributions](../changeup_stuff_distribution.png)
+![Normal Distribution Empirical Rule](../empirical_rule.png)
 
