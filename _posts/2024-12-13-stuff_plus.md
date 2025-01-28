@@ -45,6 +45,5 @@ As described earlier, Stuff+ measures how well a pitcher induces whiffs compared
 
 ## Project Applications
 
-While the model building process of this project was great, the more important part lies in the applications and in how the Auburn pitching staff can utilize the information to improve their performance. 
-
+With the trained models, we could move into the applications of the project. 
 
