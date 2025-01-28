@@ -45,5 +45,17 @@ As described earlier, Stuff+ measures how well a pitcher induces whiffs compared
 
 ## Project Applications
 
-With the trained models, we could move into the applications of the project. 
+With the trained models, we could move into the applications of the project. I created a web application for the team's use where a coach or player could upload a .csv file and immediately get feeback on pitch tendencies (location, speed vs. spin, movement profile), subsetable by pitch type and batter handedness. On top of this, pitcher Stuff+ is shown via two heatmaps: one indicating pitch spin vs. speed and the other showing pitch movement profile, and how these compare to other pitches of the same type. The graph is colored by average stuff+, and the white cross indicates where the selected pitcher falls in the distribution. This can give the pitching staff insight on what characteristics of the pitch need to change to improve general effectiveness. In the following examples, names are blacked out for confidentiality.
 
+![Location Example](../app_location_example.png)
+![Profile Example](../app_profile_example.png)
+![Stuff+ Example](../app_stuff_example.png)
+
+
+That is all for the current stage of the project and web application. Very soon, several features will be added. Those include:
+- Customizable Stuff+ calculator to influence pitcher improvement
+- Consolidation of graphs
+
+## Personal Experience with Project
+
+This project has been an amazing learning experience personally. As a stats/data science graduate student, I have spent a lot of time with machine learning prediction and things like that, so model building came fairly easily for this project. The best experiences came from the communications required with the Auburn baseball team and what that entails, as well as the web app builiding and hosting process.
