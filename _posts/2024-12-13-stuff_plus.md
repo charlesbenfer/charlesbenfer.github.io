@@ -13,7 +13,7 @@ author: Charles Benfer
 
 ## Project Goals
 
-This year I was given the opportunity by a friend and colleague of mine to join a project working with the baseball team at Auburn University, specifically working with the pitching staff. The main goals for this project were simple to state, but less simple to implement. First, we wanted to develop a way to evaluate pitchers from other college teams, especially teams outside of the SEC, with the ultimate of understanding of their "stuff" will translate to SEC play. Second, we wanted to develop a way to motivate pitcher improvement plans, trying to understand which aspects of a pitch make it more or less effective than others. This sort of framework is not a new idea in baseball, but if properly implemented, can be invaluable when it come to team performance. If a school like Auburn, who ranked very poorly in the SEC in the 2023-2024 season in terms of pitching, can pick up some good pitchers from the transfer portal, and fine-tune the guys on the squad already, the team will be one step closer to the success seen in recent years. 
+This year I was given the opportunity by a friend and colleague of mine to join a project working with the baseball team at Auburn University, specifically working with the pitching staff. The main goals for this project were to develop a way to evaluate pitchers from other college teams, especially teams outside of the SEC, to understand if/how their "stuff"  will translate to SEC play, and to develop a way to motivate pitcher improvement plans, and to statistically understand which aspects of a pitch make it more or less effective than others. This sort of framework is not a new idea in baseball, but if properly implemented, can be invaluable when it come to team performance. If a program like Auburn, who ranked very poorly in the SEC in the 2023-2024 season in terms of pitching, can pick up some good pitchers from the transfer portal and fine-tune the guys on the squad already, the team will be one step closer to the success seen in recent years. 
 
 ## Project Methods
 
@@ -45,16 +45,14 @@ As described earlier, Stuff+ measures how well a pitcher induces whiffs compared
 
 ## Project Applications
 
-With the trained models, we could move into the applications of the project. I created a web application for the team's use where a coach or player could upload a .csv file and immediately get feeback on pitch tendencies (location, speed vs. spin, movement profile), subsetable by pitch type and batter handedness. On top of this, pitcher Stuff+ is shown via two heatmaps: one indicating pitch spin vs. speed and the other showing pitch movement profile, and how these compare to other pitches of the same type. The graph is colored by average stuff+, and the white cross indicates where the selected pitcher falls in the distribution. This can give the pitching staff insight on what characteristics of the pitch need to change to improve general effectiveness. In the following examples, names are blacked out for confidentiality.
+With the trained models, we could move into the applications of the project. I created a web application for the team's use where a coach or player could upload a trackman .csv file from a game or a bullpen session and immediately get feeback on pitch tendencies (location, speed vs. spin, movement profile), subsetable by pitch type and batter handedness. On top of this, pitcher Stuff+ is shown via two heatmaps: one indicating pitch spin vs. speed and the other showing pitch movement profile, and how these compare to other pitches of the same type. The graph is colored by average stuff+, and the white cross indicates where the selected pitcher falls in the distribution. This can give the pitching staff insight on what characteristics of the pitch need to change to improve general effectiveness. In the following examples, names are blacked out for confidentiality.
 
 ![Location Example](../app_location_example.png)
 ![Profile Example](../app_profile_example.png)
 ![Stuff+ Example](../app_stuff_example.png)
 
 
-That is all for the current stage of the project and web application. Very soon, several features will be added. Those include:
-- Customizable Stuff+ calculator to influence pitcher improvement
-- Consolidation of graphs
+This web addresses the two main goals at the same time. We can take .csv files from pitchers in other conferences, high school, etc, throw it into the app and see how it stacks up compared to pitchers currently in the SEC. A guy who averages 12K/9 in the Big 10 is obviously very successful up there, but the app may indicate that he is just average in comparison to SEC pitchers. 
 
 ## Personal Experience with Project
 
