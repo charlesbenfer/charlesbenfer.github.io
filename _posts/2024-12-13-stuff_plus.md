@@ -53,6 +53,8 @@ With the trained models, we could move into the applications of the project. I c
 ![Profile Example](../app_profile_example.png)
 ![Stuff+ Example](../app_stuff_example.png)
 
+*We can see here that this pitcher's four-seam could use more ride (left hand side) and more velocity (right hand side). Not necessarily revolutionary...*
+
 
 This app addresses the two main goals at the same time. We can take .csv files from pitchers in other conferences, high school, etc, throw it into the app and see how it stacks up compared to pitchers currently in the SEC. A guy who averages 12K/9 in the Big 10 is obviously very successful up there, but the app may indicate that he is just average in comparison to SEC pitchers. At the same time, after a practice, intersquad matchup, or full game, the trackman data can be analyzed immediately to see how a guy's stuff looked for that subset of pitches. This can be used as an additional point in favor or against changes being made to the pitcher's arsenal.  
 
