@@ -26,6 +26,9 @@ The reality is, there is not one single metric or aspect of a pitcher's game tha
 
 ### Quantifying Pitcher Effectiveness
 
+So our model has a clear output: Did you win the Cy Young? Whether this is a binary 0 if you didn't 1 if you did, multiclass where the label is the place you finish, or regressing on total points in the final standing, these are all essentially equivalent.
+
+What is not finalized, however, is the set of predictors. As discussed in the previous section, there is no one feature or set of features that seems to translate linearly, or non-linearly, to Cy Young ranking.
 
 ### A Meta-Model Approach
 
