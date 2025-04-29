@@ -20,7 +20,14 @@ Let's take a look at the Cy Young award winners in both the American and Nationa
 
 What, if anything, do all 6 of these pitchers have in common? In 2024, Skubal relied a lot on his high 90's 4-Seam to blow by guys, and nasty breaking stuff to miss bats and confuse timing, combining to a 5-pitch mix of 4-seam, Change, Sinker, Slider, Curve with 33%, 27%, 20%, 15%, and 4% usage, respectively. In 2022, Sandy Alcantara threw 4 pitches with almost identical usage - Change, 4-seam, Sinker, Slider at 27%, 25%, 25%, 22% respectively. So a primary 4-seam with peppered off-speed and breaking pitches is not the formula, even though this is exactly what Blake Snell featured in 2023, throwing about 50%  4-seams. 
 
-Pitch mix was never the answer, was it? If there was a 3 pitch sequence that resulted in a Cy Young winner, that would be the only 3-pitch sequence ever thrown. So perhaps, it boils down to command? Or velocity? When following this path of logic, the answer remains unclear. In 2022, Justin Verlander was in the top 94th percentile for walk-rate, limiting free bases with the best of them, while 2023 Blake Snell was in the bottom 4th percentile!!! of walk-rate. 
+Pitch mix was never the answer, was it? If there was a 3 pitch sequence that resulted in a Cy Young winner, that would be the only 3-pitch sequence ever thrown. So perhaps, it boils down to command? Or velocity? When following this path of logic, the answer remains unclear. In 2022, Justin Verlander was in the top 94th percentile for walk-rate, limiting free bases with the best of them, while 2023 Blake Snell was in the bottom 4th percentile!!! of walk-rate, adopting a "well you aren't biting on my pitches, I bet the next guy will" mentality. 
+
+The reality is, there is not one single metric or aspect of a pitcher's game that results in an effective season, let alone a Cy Young season. If we want to predict who will the Cy Young award in any given year, the problem arises: how do we quantify pitcher effectiveness? 
+
+### Quantifying Pitcher Effectiveness
+
+
+
 
 
 
