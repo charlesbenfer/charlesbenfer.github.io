@@ -1,8 +1,5 @@
 ---
 layout: post
-title: 
----
-layout: post
 title: Combining Pitch-Level, Game-Level, and Season Level Data to Quantify Pitcher Performance
 subtitle: A meta-model approach to Cy Young award prediction
 cover-img: ../assets/img/stuff_header.png 
