@@ -27,6 +27,15 @@ The reality is, there is not one single metric or aspect of a pitcher's game tha
 ### Quantifying Pitcher Effectiveness
 
 
+### A Meta-Model Approach
+
+
+### Results
+
+
+### Future Work
+
+
 
 
 
