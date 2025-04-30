@@ -24,11 +24,15 @@ Pitch mix was never the answer, was it? If there was a 3 pitch sequence that res
 
 The reality is, there is not one single metric or aspect of a pitcher's game that results in an effective season, let alone a Cy Young season. If we want to predict who will the Cy Young award in any given year, the problem arises: how do we quantify pitcher effectiveness? 
 
-### Quantifying Pitcher Effectiveness
+### Quantifying the Pitching Game
 
 So our model has a clear output: Did you win the Cy Young? Whether this is a binary 0 if you didn't 1 if you did, multiclass where the label is the place you finish, or regressing on total points in the final standing, these are all essentially equivalent.
 
-What is not finalized, however, is the set of predictors. As discussed in the previous section, there is no one feature or set of features that seems to translate linearly, or non-linearly, to Cy Young ranking.
+What is not finalized, however, is the set of predictors. As discussed in the previous section, there is no one feature or set of features that seems to translate linearly, or non-linearly, to Cy Young ranking. So this sparks an idea: how can we quantify the different parts of a pitchers game? This makes total sense when taking a step back. Maybe a guy limits a lot of hard contact and doesn't issue free passes, but also doesn't make guys whiff a lot. This is the plan for a very effective pitcher. What about a guy who enduces more whiffs than not, but lets guys on via the walk a little more than desireable? This should sound familiar to the first section. Clearly, some combination of player characteristics can result in a very successful season, and I think we can predict those combinations. 
+
+#### Limiting Hard Contact
+
+
 
 ### A Meta-Model Approach
 
