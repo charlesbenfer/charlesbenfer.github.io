@@ -32,7 +32,7 @@ What is not finalized, however, is the set of predictors. As discussed in the pr
 
 #### Limiting Hard Contact
 
-
+Something that all effective pitchers seem to do is limit the hard hit ball. Whether this is well placed pitches to induce soft contact, or nasty pitches to 
 
 ### A Meta-Model Approach
 
