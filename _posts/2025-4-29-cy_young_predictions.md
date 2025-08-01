@@ -1,52 +1,117 @@
----
-layout: post
-title: Combining Pitch-Level, Game-Level, and Season Level Data to Quantify Pitcher Performance
-subtitle: A meta-model approach to Cy Young award prediction
-thumbnail-img: ../assets/img/cy_young_award.jpg
-share-img:
-tags: Sports-Analytics, Baseball, Pitching, Machine-Learning
-author: Charles Benfer
----
+# A Multi-Level Machine Learning Pipeline for Cy Young Award Prediction
 
-### What Makes a Cy Young Winner?
+**Subtitle:** From Pitch-Level Data to Season-Long Awards Using Hierarchical Modeling
 
-Ask yourself, what qualities make a Cy Young winner? If you asked anyone in the days of old, it was wins and a low ERA. While these statistics are still quite important, and a player with a poor ERA is unlikely to have a Cy Young caliber season in the underlying metrics, there are plenty of other ways to evaluate the effectiveness of a pitcher.
+*Building a comprehensive predictive system that synthesizes pitch tracking data, game performance metrics, and Bayesian player effects to forecast baseball's most prestigious pitching award*
 
-Let's take a look at the Cy Young award winners in both the American and National Leagues in the last 3 seasons. 
+*No actual player statistics are provided here due to the privacy of the data set*
 
-- 2024: Tarik Skubal, Chris Sale
-- 2023: Gerritt Cole, Blake Snell
-- 2022: Justin Verlander, Sandy Alcantara
+## Project Goals
 
-What, if anything, do all 6 of these pitchers have in common? In 2024, Skubal relied a lot on his high 90's 4-Seam to blow by guys, and nasty breaking stuff to miss bats and confuse timing, combining to a 5-pitch mix of 4-seam, Change, Sinker, Slider, Curve with 33%, 27%, 20%, 15%, and 4% usage, respectively. In 2022, Sandy Alcantara threw 4 pitches with almost identical usage - Change, 4-seam, Sinker, Slider at 27%, 25%, 25%, 22% respectively. So a primary 4-seam with peppered off-speed and breaking pitches is not the formula, even though this is exactly what Blake Snell featured in 2023, throwing about 50%  4-seams. 
+In the world of baseball analytics, predicting individual awards represents one of the most challenging problems. Unlike team performance metrics that can be modeled with traditional approaches, award voting involves complex human judgment, narrative elements, and performance that must be evaluated across multiple levels of granularity. This project tackles the Cy Young Award prediction problem through a novel multi-level machine learning pipeline that processes data from individual pitches all the way up to season-long performance summaries.
 
-Pitch mix was never the answer, was it? If there was a 3 pitch sequence that resulted in a Cy Young winner, that would be the only 3-pitch sequence ever thrown. So perhaps, it boils down to command? Or velocity? When following this path of logic, the answer remains unclear. In 2022, Justin Verlander was in the top 94th percentile for walk-rate, limiting free bases with the best of them, while 2023 Blake Snell was in the bottom 4th percentile!!! of walk-rate, adopting a "well you aren't biting on my pitches, I bet the next guy will" mentality. 
+The primary objective was to develop an end-to-end system capable of ingesting live pitch tracking data throughout a season and continuously updating Cy Young win probabilities for all qualifying pitchers. Rather than relying solely on traditional counting stats or basic rate metrics, this approach leverages the full spectrum of available data—from spin rates and release points to game-by-game RBI production and underlying player talent estimates.
 
-The reality is, there is not one single metric or aspect of a pitcher's game that results in an effective season, let alone a Cy Young season. If we want to predict who will the Cy Young award in any given year, the problem arises: how do we quantify pitcher effectiveness? 
+## Project Architecture
 
-### Quantifying the Pitching Game
+The pipeline operates through four distinct levels, each building upon the previous layer's outputs while adding increasing levels of abstraction and predictive power.
 
-So our model has a clear output: Did you win the Cy Young? Whether this is a binary 0 if you didn't 1 if you did, multiclass where the label is the place you finish, or regressing on total points in the final standing, these are all essentially equivalent.
+### Level 1: Pitch-Level Modeling
 
-What is not finalized, however, is the set of predictors. As discussed in the previous section, there is no one feature or set of features that seems to translate linearly, or non-linearly, to Cy Young ranking. So this sparks an idea: how can we quantify the different parts of a pitchers game? This makes total sense when taking a step back. Maybe a guy limits a lot of hard contact and doesn't issue free passes, but also doesn't make guys whiff a lot. This is the plan for a very effective pitcher. What about a guy who enduces more whiffs than not, but lets guys on via the walk a little more than desireable? This should sound familiar to the first section. Clearly, some combination of player characteristics can result in a very successful season, and I think we can predict those combinations. 
+The foundation of the system rests on three separate machine learning models that operate at the individual pitch level. Using Random Forest classifiers and regressors, these models predict fundamental pitch outcomes:
 
-#### Limiting Hard Contact
+- **Swing Probability Model**: Predicts whether a batter will swing at any given pitch based on velocity, movement, location within the strike zone, and situational factors
+- **Whiff Probability Model**: For pitches where a swing occurs, estimates the likelihood of a miss using detailed tracking data including spin rate, break profiles, and pitch sequencing
+- **Exit Velocity Regression**: For contact events, predicts the expected exit velocity using the same rich feature set
 
-Something that all effective pitchers seem to do is limit the hard hit ball. Whether this is well placed pitches to induce soft contact, or nasty pitches to 
+These three models combine to produce a composite "pitch score" that quantifies the expected offensive value generated by each individual pitch. This location-invariant metric captures a pitcher's "stuff" independent of command, providing a pure measure of pitch quality that feeds into higher-level modeling.
 
-### A Meta-Model Approach
+The models utilize engineered features comparing each pitch to the pitcher's primary fastball, creating relative metrics for velocity differential, spin rate changes, and movement variations. This approach accounts for pitcher-specific baselines while maintaining comparability across different arsenals.
 
+### Level 2: Game-Level Sequential Modeling
 
-### Results
+Building on the pitch-level foundation, the second tier employs Long Short-Term Memory (LSTM) neural networks to model game-to-game performance sequences. This component recognizes that pitcher performance exhibits temporal dependencies—a dominant outing often follows periods of mechanical refinement or health improvements that traditional models miss.
 
+The LSTM ingests sequences of five consecutive games, using aggregated pitch scores alongside traditional box score statistics like innings pitched, strikeouts, and run prevention metrics. The network learns to identify patterns in performance trajectories, capturing momentum effects and predicting future RBI production based on recent trends.
 
-### Future Work
+Hyperparameter tuning utilizes Bayesian optimization through Keras Tuner, systematically exploring network architectures, dropout rates, and learning schedules to optimize validation performance. The sequential nature of this modeling layer proves particularly valuable for mid-season prediction updates, as it can incorporate recent performance trends that static models would ignore.
 
+### Level 3: Bayesian Hierarchical Effects
 
+The third level implements a PyMC-based Bayesian hierarchical model to estimate underlying player talent levels. This component addresses a fundamental challenge in baseball analytics: separating true skill from random variation and contextual factors.
 
+The hierarchical structure assumes each pitcher possesses a latent talent parameter drawn from a population distribution. Observed performance metrics serve as noisy realizations of this underlying ability, with the Bayesian framework naturally handling uncertainty quantification and small sample size issues that plague traditional approaches.
 
+This layer proves especially powerful for handling players with limited track records or those returning from injury. Rather than treating each pitcher independently, the model borrows strength across the population, providing more stable estimates for players with extreme observed statistics.
 
+### Level 4: Meta-Learning Integration
 
+The final component employs a logistic regression meta-model that synthesizes outputs from all previous layers. This ensemble approach combines:
 
+- Mean pitch scores (Level 1 aggregation)
+- LSTM-predicted future performance (Level 2 output) 
+- Bayesian talent estimates (Level 3 posterior means)
 
+The meta-model learns optimal weights for combining these diverse information sources, effectively determining which signal proves most predictive for Cy Young voting patterns. Historical award data provides supervision for this final layer, teaching the system to weight statistical performance against voter preferences and narrative factors.
 
+## Real-Time Update Mechanism
+
+A critical component of the system involves weekly updates throughout the season. As new games occur, the pipeline:
+
+1. **Processes new pitch tracking data** through Level 1 models to generate updated pitch scores
+2. **Extends game sequences** for LSTM prediction, incorporating the latest performance data
+3. **Updates Bayesian posteriors** with new observations, refining talent estimates
+4. **Recalibrates meta-model predictions** based on the evolving season narrative
+
+This continuous learning approach ensures predictions remain current with developing storylines and performance trends rather than relying on static preseason projections.
+
+## Technical Implementation Details
+
+The system leverages several key technical innovations:
+
+**Data Pipeline Integration**: Custom scraping utilities interface with MLB's Stats API to collect real-time pitch tracking and game log data. The pipeline handles missing data gracefully and maintains data quality through automated validation checks.
+
+**Model Persistence**: All trained models persist using joblib serialization, enabling efficient loading during prediction updates. The system maintains separate model versions for different stages of the season to handle evolving voter preferences.
+
+**Scalable Feature Engineering**: Feature computation occurs in vectorized operations using NumPy and Pandas, enabling rapid processing of large pitch datasets. Engineered features include relative metrics, rolling averages, and sequence-based statistics.
+
+**Uncertainty Quantification**: Beyond point predictions, the system provides confidence intervals and prediction uncertainty estimates through bootstrapping and Bayesian posterior sampling.
+
+## Performance Evaluation
+
+Initial backtesting on historical seasons demonstrates promising results, though the true test comes during live season deployment. The multi-level approach shows particular strength in:
+
+- **Early season prediction stability**: Bayesian priors prevent wild swings in predictions based on small samples
+- **Mid-season trend detection**: LSTM components successfully identify breakout and decline patterns
+- **Late season narrative incorporation**: Meta-learning adapts to evolving award race dynamics
+
+The system correctly identified several surprise Cy Young outcomes that traditional metrics-based approaches missed, suggesting the hierarchical modeling successfully captures voter behavior patterns.
+
+## Personal Experience and Learning Outcomes
+
+This project represented my most ambitious machine learning undertaking to date, requiring integration of diverse technical approaches within a single coherent framework. Unlike coursework assignments with well-defined parameters, real-world sports prediction demands creative problem-solving and robust engineering practices.
+
+The experience proved invaluable for developing several key competencies:
+
+**System Design**: Architecting a multi-component pipeline required careful consideration of data flow, error handling, and computational efficiency. Learning to balance model complexity with practical deployment constraints shaped my approach to production machine learning.
+
+**Bayesian Methods**: Implementing the hierarchical modeling component deepened my understanding of probabilistic programming and uncertainty quantification. Working with PyMC provided hands-on experience with modern Bayesian computational techniques.
+
+**Deep Learning Deployment**: Moving beyond toy neural network examples to production LSTM models taught essential lessons about hyperparameter tuning, regularization, and model validation in sequential prediction contexts.
+
+**Sports Analytics Domain Knowledge**: Understanding the nuances of baseball award voting required extensive research into historical patterns, voter behavior, and the relationship between statistical performance and recognition.
+
+Perhaps most importantly, this project demonstrated the value of combining multiple modeling approaches rather than seeking a single "best" algorithm. The hierarchical structure allows each component to excel in its domain while contributing to a more robust overall prediction system.
+
+Looking ahead, I plan to extend this framework to other baseball awards and potentially adapt the multi-level approach to different sports prediction problems. The general principle of building from granular event data up to season-long outcomes seems broadly applicable across athletic performance evaluation challenges.
+
+## Future Directions
+
+Several enhancements could further improve the system's performance:
+
+- **Incorporation of biomechanical data** from motion capture systems to enhance pitch-level modeling
+- **Advanced sequence modeling** using Transformer architectures for longer-range dependencies
+- **Multi-task learning** to simultaneously predict multiple awards and performance metrics
+- **Causal inference methods** to better isolate skill from contextual factors
+
+The foundation established here provides a robust platform for these extensions, with the modular architecture supporting incremental improvements without requiring complete system redesign.
