@@ -2,7 +2,7 @@
 layout: post
 title: A Multi-Level Machine Learning Pipeline for Cy Young Award Prediction
 subtitle: From Pitch-Level Data to Season-Long Awards Using Hierarchical Modeling
-cover-img: ../assets/img/cy_young_header.png
+cover-img: ../assets/img/cy_header.png
 thumbnail-img: ../cy_young_thumb.jpeg
 share-img:
 tags: Sports-Analytics, Baseball, Machine-Learning, Bayesian-Modeling, Deep-Learning
