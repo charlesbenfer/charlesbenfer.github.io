@@ -2,7 +2,7 @@
 layout: post
 title: Engineering 255+ Features for MLB Home Run Prediction
 subtitle: Advanced Feature Engineering Pipeline for Sports Betting Applications
-cover-img: ../assets/img/feature_engineering_header_short.png
+cover-img: ../assets/img/feature_engineering_header_final.png
 thumbnail-img: ../assets/img/feature_engineering_header_updated.png 
 share-img:
 tags: Sports-Analytics, Baseball, Machine-Learning, Feature-Engineering, Sports-Betting
