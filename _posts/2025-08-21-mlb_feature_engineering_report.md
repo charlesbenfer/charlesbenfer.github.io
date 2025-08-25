@@ -11,7 +11,6 @@ custom_css: |
       color: black !important;
     }
   </style>
----
 subtitle: Advanced Feature Engineering Pipeline for Sports Betting Applications
 cover-img: ../assets/img/feature_engineering_header_final.png
 thumbnail-img: ../assets/img/feature_engineering_header_updated.png 
