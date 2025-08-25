@@ -2,7 +2,7 @@
 layout: post
 title: From Features to Profits - Building a Production MLB Betting System
 subtitle: Advanced Modeling, Comparative Analysis, and Real-World Betting Implementation
-thumbnail-img: ../assets/img/mlb_modeling_header.png 
+thumbnail-img: ../assets/img/mlb_betting_thumbnail.png 
 share-img:
 tags: Sports-Analytics, Baseball, Machine-Learning, Sports-Betting, Production-Systems
 author: Charles Benfer
