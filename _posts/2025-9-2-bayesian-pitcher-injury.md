@@ -2,9 +2,9 @@
 layout: post
 title: Predicting Pitcher Injuries with Bayesian Survival Analysis
 subtitle: A Deep Dive into Model Development and the Quest for Better Features
-cover-img: ../assets/img/injury_header.png
-thumbnail-img: ../injury_thumb.jpeg
-share-img:
+cover-img: ../assets/img/pitcher_injury_header.png
+thumbnail-img: ../assets/img/pitcher_injury_thumbnail.png
+share-img: ../assets/img/pitcher_injury_thumbnail.png
 tags: Sports-Analytics, Baseball, Bayesian-Statistics, Survival-Analysis, Machine-Learning
 author: Charles Benfer
 ---
@@ -208,7 +208,7 @@ Before diving into results, let me explain what these metrics mean in plain term
 
 - **C-index (Concordance Index)**: As explained earlier, this measures how often the model correctly ranks injury risk. Our 0.592 means that given any two pitchers, the model correctly identifies which one will get injured first about 59% of the time. While this might not sound impressive, in medical prediction (which injury prediction resembles), C-indices of 0.6-0.7 are considered clinically useful.
 
-- **Brier Score**: This measures how close predicted probabilities are to actual outcomes. If I predict 60% injury risk for 10 pitchers, about 6 should actually get injured. Our score of 0.229 beats the baseline of 0.25 (which you'd get by always predicting the population average).
+- **Brier Score**: This measures how close predicted probabilities are to actual outcomes. If I predict 60% injury risk for 10 pitchers, about 6 should actually get injured. Our score of 0.229 beats the baseline of 0.241 (which you'd get by always predicting the population average of 40.7% injury rate for everyone).
 
 - **Calibration**: This checks if predicted probabilities match reality. When the model says "30% risk," do 30% of those pitchers actually get injured? Good calibration means teams can trust the risk percentages.
 
@@ -216,7 +216,7 @@ Before diving into results, let me explain what these metrics mean in plain term
 
 The model achieved:
 - **C-index: 0.592** on completely unseen 2024 data
-- **Brier Score: 0.229** (beating baseline of 0.25)
+- **Brier Score: 0.229** (beating baseline of 0.241)
 - **Proper calibration**: Risk categories showed monotonic injury rates:
   - Low Risk: 28.8% actual injury rate
   - Moderate Risk: 34.6% actual injury rate  
