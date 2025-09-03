@@ -2,7 +2,6 @@
 layout: post
 title: Predicting Pitcher Injuries with Bayesian Survival Analysis
 subtitle: A Deep Dive into Model Development and the Quest for Better Features
-cover-img: ../assets/img/pitcher_injury_header.png
 thumbnail-img: ../assets/img/pitcher_injury_thumbnail.png
 share-img: ../assets/img/pitcher_injury_thumbnail.png
 tags: Sports-Analytics, Baseball, Bayesian-Statistics, Survival-Analysis, Machine-Learning
