@@ -259,6 +259,20 @@ If I could extend this project, the priorities would be:
 4. **Pitch-level modeling**: Use granular pitch data rather than season aggregates
 5. **Causal inference**: Move beyond prediction to understand what interventions might prevent injuries
 
+## Code Availability
+
+All code, notebooks, and the interactive dashboard from this project are available on GitHub:
+
+**[github.com/charlesbenfer/pitcher-injury-analysis](https://github.com/charlesbenfer/pitcher-injury-analysis)**
+
+The repository includes:
+- The complete Bayesian survival analysis notebook with all model iterations
+- Production-ready Streamlit dashboard for risk assessment
+- Data processing pipelines and validation scripts
+- 2025 season projections for all active MLB pitchers
+
+Feel free to clone, modify, and improve upon this work. If you have access to biomechanical data, I'd love to see how much the model improves!
+
 ## Conclusion
 
 Building a pitcher injury prediction system taught me that real-world data science is messy, iterative, and humbling. The model that works is rarely the fanciest one - it's the one that correctly handles the fundamentals. While the current system provides value with a C-index of 0.607 and proper calibration, the ceiling for improvement is clear: biomechanical data would transform this from a decent statistical model into a truly powerful injury prevention tool.
