@@ -103,7 +103,7 @@ The model builds an ensemble of decision trees, each learning from the mistakes 
 
 ### Bayesian Alternative
 
-I also implemented a Bayesian model using PyMC for situations requiring uncertainty quantification:
+I also implemented a Bayesian model using PyMC. From what I understand, the Bayesian approach is the industry standard, and was my original idea when starting this project:
 
 ```python
 with pm.Model() as bayesian_model:
