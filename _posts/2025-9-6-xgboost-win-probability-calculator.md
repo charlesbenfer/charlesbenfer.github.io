@@ -170,49 +170,6 @@ calibrated_probs = iso_cal.transform(test_predictions)
 
 However, sigmoid calibration proved superior for this dataset, achieving better log loss (0.357 vs 0.378) while providing reliable probability estimates across the full range of game situations.
 
-## Integration with Bullpen Management
-
-The win probability model serves as the foundation for my reinforcement learning bullpen management system. The integration provides three key capabilities:
-
-### 1. State Evaluation
-Every game state now has an associated win probability, allowing the RL agent to understand the true value of its position:
-
-```python
-def calculate_win_probability(self, game_state, pitcher_stats):
-    features = self.extract_features(game_state, pitcher_stats)
-    return self.model.predict_proba(features)[0, 1]
-```
-
-### 2. Decision Impact Assessment
-The model quantifies the expected impact of pitcher changes:
-
-```python
-def evaluate_pitcher_change(self, game_state, current_pitcher, new_pitcher):
-    current_wp = self.calculate_win_probability(game_state, current_pitcher)
-    new_wp = self.calculate_win_probability(game_state, new_pitcher)
-    return {
-        'current_wp': current_wp,
-        'new_wp': new_wp,
-        'expected_change': new_wp - current_wp,
-        'recommendation': 'change' if new_wp > current_wp + 0.01 else 'stay'
-    }
-```
-
-### 3. Reward Shaping
-The RL agent's rewards are now based on actual win probability changes rather than simplified heuristics:
-
-```python
-def calculate_reward(self, action, old_state, new_state):
-    old_wp = self.calculate_win_probability(old_state)
-    new_wp = self.calculate_win_probability(new_state)
-    
-    # Reward is WP change, with penalties for pitcher usage
-    base_reward = new_wp - old_wp
-    usage_penalty = -0.02 if action == 'change_pitcher' else 0
-    
-    return base_reward + usage_penalty
-```
-
 ## Performance and Validation
 
 The model achieved strong performance metrics on held-out 2024 test data:
@@ -243,35 +200,6 @@ Critically, the leak-free pipeline was validated:
 - Late inning correlations with outcome: 0.45-0.55 (expected: high)
 - No evidence of future information leakage
 
-## Real-World Impact Examples
-
-To illustrate the model's practical value, here are typical scenarios and the model's assessments:
-
-### Scenario 1: The Fatigue Decision
-- **Situation**: 7th inning, home team up 3-2, starter at 95 pitches, runners on 1st and 2nd, 1 out
-- **Current pitcher**: Tired starter (ERA 3.50, 3rd time through order)
-- **Available reliever**: Fresh setup man (ERA 2.80)
-- **Model assessment**: 
-  - Current WP: 61.3%
-  - With reliever: 65.8%
-  - **Recommendation**: Make the change (+4.5% WP gain)
-
-### Scenario 2: The Platoon Advantage
-- **Situation**: 8th inning, tied game, runner on 2nd, 2 outs
-- **Current pitcher**: RHP reliever facing LH power hitter
-- **Available**: LHP specialist
-- **Model assessment**:
-  - Current WP: 48.2%
-  - With specialist: 51.6%
-  - **Recommendation**: Make the change (+3.4% WP gain)
-
-### Scenario 3: Save the Closer
-- **Situation**: 9th inning, up 4-0, bases empty
-- **Question**: Use the closer or save him?
-- **Model assessment**:
-  - Current WP with middle reliever: 96.8%
-  - With closer: 97.9%
-  - **Recommendation**: Save the closer (+1.1% gain not worth it)
 
 ## Lessons Learned
 
@@ -320,9 +248,9 @@ Use the Bayesian model's uncertainty estimates to make risk-adjusted decisions i
 
 ## Conclusion
 
-Building a production-ready win probability model required more than just applying XGBoost to baseball data. The critical innovation was identifying and eliminating data leakage through careful pre-at-bat state capture. This seemingly simple fix transformed an overfit model with imaginary 95% accuracy into an honest, reliable system with 88.5% ROC-AUC.
+Building a production-ready win probability model required more than just applying XGBoost to baseball data. The critical innovation was identifying and eliminating data leakage through careful pre-at-bat state capture.
 
-The model now serves as the foundation for multiple downstream projects. My reinforcement learning bullpen management system uses it to evaluate every potential pitcher change. Future projects will leverage it for in-game strategy optimization, player valuation adjustments, and even fan engagement applications.
+The model now serves as the foundation for multiple downstream projects. My reinforcement learning bullpen management system (post to come soon) uses it to evaluate every potential pitcher change. Future projects will leverage it for in-game strategy optimization, player valuation adjustments, and even fan engagement applications.
 
 Most importantly, this project demonstrated that rigorous attention to data quality and proper validation trumps algorithmic complexity. A simple XGBoost model with clean data outperforms sophisticated approaches built on flawed foundations. In sports analytics, as in many domains, getting the fundamentals right is the key to building systems that actually work when it matters - during the game, when decisions have real consequences.
 
