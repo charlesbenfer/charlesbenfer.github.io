@@ -2,17 +2,17 @@
 layout: post
 title: Building a Comps-Based Free Agent Evaluation System for Baseball
 subtitle: Production-Ready Player Similarity Engine for Contract Analysis
-thumbnail-img: ../assets/img/baseball_similarity_header.png
-share-img: ../assets/img/baseball_similarity_header.png
+thumbnail-img: 
+share-img:
 tags: Sports-Analytics, Baseball, Machine-Learning, Free-Agency, Player-Evaluation
 author: Charles Benfer
 ---
 
 ## Project Overview
 
-Front offices, agents, and analysts all face the same fundamental question when evaluating free agents: "What should we expect from this player?" Historical comparables—"comps"—provide one of the most intuitive and powerful frameworks for answering this question. In December 2025, I built a production-ready system that automates the process of finding and analyzing comparable players, providing data-driven insights for contract evaluation and performance projection.
+Front offices, agents, and analysts all face the same fundamental question when evaluating free agents: "What should we expect from this player?" Historical comparables provide one of the most intuitive and powerful frameworks for answering this question. To this end, I built a production-ready system that automates the process of finding and analyzing comparable players, providing data-driven insights for contract evaluation and performance projection.
 
-The system finds historical players with similar profiles (age, stats, skillset) and tracks how those players performed in subsequent years. This creates a foundation for projecting future value, understanding aging curves, and ultimately making better contract decisions. Unlike simple similarity scores that only consider career statistics, this system focuses specifically on the free agent context—analyzing players at similar career stages with similar immediate performance profiles.
+The system finds historical players with similar profiles (age, stats, skillset) and tracks how those players performed in subsequent years. This creates a foundation for projecting future value, understanding aging curves, and ultimately making better contract decisions. Unlike simple similarity scores that only consider career statistics, this system focuses specifically on the free agent context, analyzing players at similar career stages with similar immediate performance profiles.
 
 ## The Challenge: Beyond Simple Statistics
 
@@ -43,34 +43,6 @@ Visualization & Output Layer (charts, dashboards, CSV)
 
 This architecture enables easy extension and modification. Want to add Statcast metrics? Modify the data layer. Need custom similarity weights for different player types? Adjust the similarity engine. The modular design keeps these concerns separate and maintainable.
 
-### Intelligent Data Collection
-
-One of the first technical challenges was dealing with FanGraphs' API limitations. Requesting 13 years of data (2010-2022) in a single call would timeout with HTTP 500 errors. The solution: automatic chunking with intelligent batching.
-
-```python
-def get_batting_stats(self, start_year: int, end_year: int, min_pa: int = 200):
-    year_range = end_year - start_year + 1
-    chunk_size = 5  # Fetch 5 years at a time
-
-    if year_range > chunk_size:
-        all_data = []
-        for chunk_start in range(start_year, end_year + 1, chunk_size):
-            chunk_end = min(chunk_start + chunk_size - 1, end_year)
-            chunk_data = batting_stats(chunk_start, chunk_end, qual=min_pa)
-            all_data.append(chunk_data)
-            time.sleep(1)  # Be respectful to the API
-
-        data = pd.concat(all_data, ignore_index=True)
-    else:
-        data = batting_stats(start_year, end_year, qual=min_pa)
-
-    # Cache for future instant access
-    data.to_pickle(cache_file)
-    return data
-```
-
-This approach handles large requests gracefully, respects API rate limits, and provides detailed progress feedback. After the initial fetch, results are cached locally for instant subsequent access—transforming 60-second queries into sub-second lookups.
-
 ## The Similarity Algorithm
 
 ### Weighted Euclidean Distance
@@ -80,7 +52,7 @@ At its core, the similarity engine uses weighted Euclidean distance in standardi
 The algorithm follows these steps:
 
 1. **Standardization**: All statistics are z-score normalized to account for different scales
-2. **Weighting**: Each stat receives an importance weight reflecting its predictive value
+2. **Weighting**: Each stat receives a personally selected importance weight reflecting its predictive value
 3. **Distance Calculation**: Weighted Euclidean distance between players
 4. **Score Conversion**: Distances are converted to 0-100 similarity scores
 
@@ -505,18 +477,33 @@ The system is ready for real-world use today, whether you're a front office anal
 
 ```
 contract_similarity_evaluation/
-├── comp_finder_cli.py              # Interactive CLI (600 lines)
-├── src/
-│   ├── data/collector.py           # Data collection (250 lines)
-│   ├── similarity/scorer.py        # Similarity algorithm (250 lines)
-│   └── visualization/comp_viz.py   # Charts & dashboards (400 lines)
-├── examples/
-│   ├── basic_comp_finder.py        # Batter example
+├── comp_finder_cli.py         # Interactive CLI (main entry point)
+├── setup_check.py             # Installation verification
+├── requirements.txt           # Python dependencies
+├── README.md                  # This file
+├── data/                      # Data storage
+│   ├── raw/                   # Raw data from sources
+│   ├── processed/             # Cleaned and processed data
+│   └── cache/                 # Cached API responses
+├── src/                       # Source code
+│   ├── data/                  # Data collection and processing
+│   │   └── collector.py       # BaseballDataCollector class
+│   ├── similarity/            # Similarity algorithms
+│   │   └── scorer.py          # PlayerSimilarityScorer class
+│   ├── modeling/              # Predictive models (future)
+│   └── visualization/         # Plotting and dashboards
+│       └── comp_viz.py        # CompVisualization class
+├── examples/                  # Example scripts and use cases
+│   ├── basic_comp_finder.py        # Simple batter example
+│   ├── comp_finder_with_viz.py     # Full analysis with charts
 │   └── pitcher_comp_finder.py      # Pitcher example
-├── docs/
-│   ├── CLI_GUIDE.md
-│   ├── PITCHER_GUIDE.md
-│   ├── GETTING_STARTED.md
-│   └── ARCHITECTURE.md
-└── tests/                          # Unit tests (to be implemented)
+├── docs/                      # Documentation
+│   ├── CLI_GUIDE.md           # Complete CLI walkthrough
+│   ├── CLI_DEMO.md            # Real-world examples
+│   ├── PITCHER_GUIDE.md       # Pitcher-specific guide
+│   ├── GETTING_STARTED.md     # Python API tutorial
+│   ├── ARCHITECTURE.md        # System design documentation
+│   └── PROJECT_SUMMARY.md     # Complete feature overview
+├── notebooks/                 # Jupyter notebooks for exploration
+└── tests/                     # Unit tests (to be implemented)
 ```
