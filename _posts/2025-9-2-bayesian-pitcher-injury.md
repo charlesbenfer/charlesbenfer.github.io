@@ -1,11 +1,14 @@
 ---
-layout: post
-title: Predicting Pitcher Injuries with Bayesian Survival Analysis
+title: "Predicting Pitcher Injuries with Bayesian Survival Analysis"
+author: "Charles Benfer"
 subtitle: A Deep Dive into Model Development and the Quest for Better Features
-thumbnail-img: ../assets/img/pitcher_injury_thumbnail.png
+output:
+  html_document:
+    df_print: paged
 share-img: ../assets/img/pitcher_injury_thumbnail.png
-tags: Sports-Analytics, Baseball, Bayesian-Statistics, Survival-Analysis, Machine-Learning
-author: Charles Benfer
+tags: "Sports-Analytics, Baseball, Bayesian-Statistics, Survival-Analysis, Machine-Learning"
+layout: post
+thumbnail-img: ../assets/img/pitcher_injury_thumbnail.png
 ---
 
 ## Project Goals
