@@ -19,7 +19,7 @@ The system finds historical players with similar profiles (age, stats, skillset)
 Most existing player comparison systems, like Baseball Reference's similarity scores, were designed for career retrospectives rather than forward-looking analysis. They excel at finding players with similar career arcs but struggle with the specific needs of free agent evaluation:
 
 1. **Timing matters**: A 28-year-old after a career year is fundamentally different from comparing entire careers
-2. **Recent performance weighs heavily**: The last 3 seasons matter more than what happened 10 years ago
+2. **Season-specific analysis**: Comparing single-season performance rather than career totals
 3. **Context is critical**: Park factors, league environment, and role have evolved
 4. **Multiple player types**: The system needs to handle both position players and pitchers with appropriate statistics
 
