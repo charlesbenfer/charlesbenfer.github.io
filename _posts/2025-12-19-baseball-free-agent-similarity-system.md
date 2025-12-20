@@ -286,22 +286,22 @@ Finding that Cole's closest comp was Chris Sale (2017) provides immediate contex
 
 ## Visualization System
 
-The system includes comprehensive visualization tools using matplotlib, seaborn, and plotly:
+The system includes visualization tools using matplotlib, seaborn, and plotly that can be generated from both the CLI and Python API:
 
 ### 1. Similarity Score Bar Charts
-Professional horizontal bar charts showing the top 10 comps with color-coded similarity scores. Perfect for presentations and reports.
+Horizontal bar charts showing the top comps with color-coded similarity scores, saved as PNG files.
 
 ### 2. Radar Charts
-Multi-dimensional comparisons between the target player and top comp across 7-8 key statistics. Shows at a glance where players match and where they differ.
+Multi-dimensional comparisons between the target player and top comp across 7-8 key statistics, showing where players match and where they differ.
 
 ### 3. Interactive Dashboards
-Full Plotly dashboards with four panels:
+Plotly HTML dashboards with four panels:
 - Similarity score rankings
 - WAR comparison across all comps
 - Age vs WAR scatter plot
 - wRC+ comparison (or ERA for pitchers)
 
-All charts are interactive with hover details, exportable to PNG, and production-ready for professional use.
+The CLI prompts users to optionally generate all three visualizations when saving results, making them accessible without any coding required.
 
 ## Performance and Optimization
 
