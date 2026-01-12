@@ -358,7 +358,7 @@ One of the most valuable insights comes from analyzing which features drive pred
 
 **Insight:** For first-time eligibles, the primary challenge is proving you're a legitimate major leaguer. Playing time (PA_per_game) dominates because it signals that a player has earned regular playing time. Rate statistics (WAR_per_162, HR_per_162) matter more than totals because panels want to assess true talent independent of playing time variation. Power production (HR, Total_Bases) provides clear, interpretable evidence of offensive value.
 
-*[IMAGE PLACEHOLDER: Horizontal bar chart showing feature importance for Arb 1 hitters]*
+![Horizontal bar chart showing feature importance for Arb 1 hitters](../assets/img/arbitration/hitters_arb1_feature_importance.png)
 
 **Pitchers (First Arbitration):**
 1. **SO (strikeouts):** Traditional counting stat
@@ -369,7 +369,7 @@ One of the most valuable insights comes from analyzing which features drive pred
 
 **Insight:** Role definition (Starter vs reliever) is critical for first-time pitchers. Arbitration panels need context—a 2 WAR starter and a 2 WAR closer are valued differently. Traditional counting statistics (SO, SV) provide clear benchmarks. The appearance of WAR_change signals that improvement trajectories matter even for first-timers; showing development is valuable.
 
-*[IMAGE PLACEHOLDER: Horizontal bar chart showing feature importance for Arb 1 pitchers]*
+![Horizontal bar chart showing feature importance for Arb 1 pitchers](../assets/img/arbitration/pitchers_arb1_feature_importance.png)
 
 ### Arb 2: Establishing Track Record
 
@@ -382,7 +382,7 @@ One of the most valuable insights comes from analyzing which features drive pred
 
 **Insight:** With one arbitration year completed, advanced metrics (Off, OPS) gain traction alongside traditional stats. Panels have seen these players before and are comfortable with more sophisticated evaluation. Consistency matters—PA_per_game remaining important shows that maintaining regular status is valued. Power production (Total_Bases, HR_per_162) continues as a premium.
 
-*[IMAGE PLACEHOLDER: Horizontal bar chart showing feature importance for Arb 2 hitters]*
+![Horizontal bar chart showing feature importance for Arb 2 hitters](../assets/img/arbitration/hitters_arb2_feature_importance.png)
 
 **Pitchers (Second Arbitration):**
 1. **WAR:** Becomes dominant predictor
@@ -393,7 +393,7 @@ One of the most valuable insights comes from analyzing which features drive pred
 
 **Insight:** WAR takes over as the primary driver for second-year pitchers. With a track record established, panels weight overall value more heavily. Interestingly, wins (W) appear despite being team-dependent—arbitration panels still value traditional metrics. Role classification (Starter, SV) remains critical for context.
 
-*[IMAGE PLACEHOLDER: Horizontal bar chart showing feature importance for Arb 2 pitchers]*
+![Horizontal bar chart showing feature importance for Arb 2 pitchers](../assets/img/arbitration/pitchers_arb2_feature_importance.png)
 
 ### Arb 3: The Platform Year
 
@@ -406,7 +406,7 @@ One of the most valuable insights comes from analyzing which features drive pred
 
 **Insight:** Platform year dynamics differ from earlier arbitrations. Power (HR, Total_Bases) takes precedence as players position themselves for free agency—home runs are the most visible, marketable skill. WAR_change gains importance; teams and panels recognize that improvement trajectories affect upcoming free agent value. Showing development before free agency commands a premium.
 
-*[IMAGE PLACEHOLDER: Horizontal bar chart showing feature importance for Arb 3 hitters]*
+![Horizontal bar chart showing feature importance for Arb 3 hitters](../assets/img/arbitration/hitters_arb3_feature_importance.png)
 
 **Pitchers (Third Arbitration):**
 1. **WAR:** Overwhelming dominance
@@ -417,7 +417,7 @@ One of the most valuable insights comes from analyzing which features drive pred
 
 **Insight:** WAR becomes the overwhelming predictor for platform-year pitchers. With comprehensive track records, panels defer to overall value metrics. The appearance of HLD (holds) shows that setup reliever roles are recognized and valued. Role specialization matters—elite setup men command significant salaries even without closer save totals.
 
-*[IMAGE PLACEHOLDER: Horizontal bar chart showing feature importance for Arb 3 pitchers]*
+![Horizontal bar chart showing feature importance for Arb 3 pitchers](../assets/img/arbitration/pitchers_arb3_feature_importance.png)
 
 ### Cross-Level Patterns and Insights
 
