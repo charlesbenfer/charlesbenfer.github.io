@@ -44,9 +44,9 @@ My analysis focuses on recent arbitration history with complete data:
 - **1,147 pitchers** including starters and relievers
 - **Salary Range:** $387K to $31M (median: $3.2M for hitters, $2.25M for pitchers)
 - **Settlement Rate:** 94% of cases settle without going to hearing
-- **Data Sources:** MLB Trade Rumors for arbitration outcomes, FanGraphs for performance statistics
+- **Data Sources:** Spotrac for arbitration outcomes, FanGraphs for performance statistics
 
-The median hitter earned $3.2 million while pitchers earned $2.25 million, though these figures mask tremendous variation. Salaries grow substantially with each arbitration year: first-time eligible players averaged around $2 million, while third-year arbitration players (in their "platform year" before free agency) averaged over $6 million.
+The median hitter earned $3.17 million while pitchers earned $2.25 million, though these figures mask tremendous variation. Salaries grow substantially with each arbitration year: first-time eligible players averaged around $2 million, while third-year arbitration players (in their "platform year" before free agency) averaged over $6 million.
 
 ![Salary distribution histograms for hitters and pitchers, showing right-skewed distributions](../assets/img/arbitration/01_salary_distributions.png)
 
@@ -56,7 +56,7 @@ The median hitter earned $3.2 million while pitchers earned $2.25 million, thoug
 
 Building a comprehensive arbitration dataset required merging two distinct data sources:
 
-**Arbitration Outcomes (MLB Trade Rumors):**
+**Arbitration Outcomes (Spotrac):**
 The arbitration salary database provided player names, positions, teams, arbitration level, settlement amounts, and whether cases went to hearing. This created the target variable, the salary we're trying to predict, along with key contextual information about service time and arbitration status.
 
 **Performance Statistics (FanGraphs via pybaseball):**
@@ -69,11 +69,13 @@ Matching players between datasets proved more challenging than expected. Player 
 
 **Salary Distributions and Trends:**
 
-The salary data exhibits strong right-skewness. Most players cluster in the $1-4 million range, while outliers like Mike Trout ($30+ million in his final arbitration year) pull the mean higher than the median. This distribution reflects arbitration's structure: first-time eligible players start relatively low, but salaries can escalate dramatically for superstars by their third or fourth year.
+The salary data exhibits strong right-skewness. Most players cluster in the $1-4 million range, while outliers pull the mean higher than the median. This distribution reflects arbitration's structure: first-time eligible players start relatively low, but salaries can escalate dramatically for superstars by their third or fourth year.
 
-![Box plots showing salary distributions by arbitration level and position](../assets/img/arbitration/08_salary_by_arb_level.png)
+![Box plots showing salary distributions by arbitration level](../assets/img/arbitration/08_salary_by_arb_level.png)
 
 Over the 2016-2025 period, salary growth was surprisingly modest: hitters saw 1.1% annual growth while pitchers actually experienced -1.7% annual decline. This suggests that while individual players' salaries grow year-over-year as they gain experience, the overall market hasn't dramatically inflated when accounting for changes in player composition.
+
+![Salary Trend With Time](../assets/img/arbitration/02_salary_trends_over_time.png)
 
 **Position Patterns:**
 
@@ -174,7 +176,7 @@ Service time and arbitration level proved enormously predictive. The same player
 With hundreds of potential features, I needed systematic selection to avoid overfitting:
 
 **Step 1: Correlation Analysis**
-Removed highly correlated feature pairs (r > 0.90). For example, plate appearances (PA) and at-bats (AB) correlate at 0.98; I kept PA as it better captures playing time. Similarly, wOBA and OPS correlate highly; I kept both as they capture slightly different aspects of hitting.
+Removed highly correlated feature pairs (r > 0.90). For example, plate appearances (PA) and at-bats (AB) correlate at 0.98; I kept PA as it better captures playing time. Similarly, wOBA and OPS correlate highly; I kept both as I did not want to decide one over the other, and let the Random Forest selection featured next make a decision.
 
 **Step 2: Random Forest Importance Ranking**
 Trained Random Forest models and extracted feature importance scores. Features with <1% importance were removed unless they had strong domain significance (like age or service time).
@@ -204,7 +206,7 @@ Train single models on all hitters (n=778) and all pitchers (n=1,061), regardles
 - Gradient Boosting (sequential error correction)
 - XGBoost (optimized gradient boosting implementation)
 
-All models used StandardScaler normalization and 80/20 train/test splits (2016-2025 train, 2026 test).
+All models used StandardScaler normalization and 80/20 train/test splits.
 
 ### Strategy 2: Position-Specific Models
 
@@ -447,7 +449,7 @@ Despite strong model performance, several fundamental limitations constrain this
 
 Complete arbitration outcome data paired with comprehensive statistics only extends back to 2015 in my dataset. This creates a relatively short historical window, just 11 seasons, for establishing precedent patterns. Earlier arbitration cases from the 2000s and 2010s may have influenced current standards, but those precedents aren't captured in the training data.
 
-The 2015 starting point reflects data availability constraints rather than a deliberate choice. MLB Trade Rumors' comprehensive arbitration database begins around this period, and FanGraphs' advanced metrics became standardized in the mid-2010s. Earlier data exists but requires more extensive collection efforts and may lack consistent advanced statistics.
+The 2015 starting point reflects data availability constraints rather than a deliberate choice. Spotrac's comprehensive arbitration database begins around this period, and FanGraphs' advanced metrics became standardized in the mid-2010s. Earlier data exists but requires more extensive collection efforts and may lack consistent advanced statistics.
 
 **Comparable Player Data Gaps:**
 
@@ -635,7 +637,7 @@ Ultimately, arbitration salary prediction showcases how sophisticated analytics 
 ## Technical Specifications
 
 **Data Sources:**
-- Arbitration outcomes: MLB Trade Rumors Arbitration Tracker (2016-2026)
+- Arbitration outcomes: Spotrac Arbitration Tracker (2016-2026)
 - Performance statistics: FanGraphs via pybaseball package
 - Total cases: 868 hitters, 1,147 pitchers
 
