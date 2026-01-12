@@ -62,9 +62,6 @@ The arbitration salary database provided player names, positions, teams, arbitra
 **Performance Statistics (FanGraphs via pybaseball):**
 For each player-year, I collected comprehensive performance data from FanGraphs. This included traditional statistics (HR, RBI, W, ERA), advanced metrics (WAR, wRC+, FIP), and plate discipline/quality of contact statistics (BB%, K%, ISO, BABIP). The pybaseball package provided programmatic access to FanGraphs data, enabling automated collection for all players.
 
-**The Merging Challenge:**
-Matching players between datasets proved more challenging than expected. Player names contain special characters (José Ramírez), nicknames (A.J. vs. Andrew), and formatting inconsistencies. Through careful string cleaning and manual verification of non-matches, I achieved 89.9% automatic match rates for hitters and 88.4% for pitchers. Unmatched players were typically those with limited playing time who lacked FanGraphs records.
-
 ### What the Data Reveals
 
 **Salary Distributions and Trends:**
@@ -72,6 +69,8 @@ Matching players between datasets proved more challenging than expected. Player 
 The salary data exhibits strong right-skewness. Most players cluster in the $1-4 million range, while outliers pull the mean higher than the median. This distribution reflects arbitration's structure: first-time eligible players start relatively low, but salaries can escalate dramatically for superstars by their third or fourth year.
 
 ![Box plots showing salary distributions by arbitration level](../assets/img/arbitration/08_salary_by_arb_level.png)
+
+*Notice the inclusion of 'Arbitration 4' and 'Arbitration 5 Super 2.' These are considered errors, and not included in the analyses, as that situation does not seem possible.*
 
 Over the 2016-2025 period, salary growth was surprisingly modest: hitters saw 1.1% annual growth while pitchers actually experienced -1.7% annual decline. This suggests that while individual players' salaries grow year-over-year as they gain experience, the overall market hasn't dramatically inflated when accounting for changes in player composition.
 
