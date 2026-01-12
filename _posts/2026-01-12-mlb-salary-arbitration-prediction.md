@@ -352,72 +352,72 @@ One of the most valuable insights comes from analyzing which features drive pred
 ### Arb 1: Proving You Belong
 
 **Hitters (First Arbitration):**
-1. **PA_per_game (playing time):** Dominant importance
-2. **WAR_per_162:** Rate of production matters more than total
-3. **Total_Bases:** Power/extra-base production
-4. **HR:** Traditional counting stat arbitrators value
-5. **HR_per_162:** Power rate metric
+1. **PA_change:** Year-over-year change in playing time
+2. **HR:** Home runs - traditional power metric
+3. **WAR:** Overall value produced
+4. **Total_Bases:** Power/extra-base production
+5. **BB:** Walks - plate discipline indicator
 
-**Insight:** For first-time eligibles, the primary challenge is proving you're a legitimate major leaguer. Playing time (PA_per_game) dominates because it signals that a player has earned regular playing time. Rate statistics (WAR_per_162, HR_per_162) matter more than totals because panels want to assess true talent independent of playing time variation. Power production (HR, Total_Bases) provides clear, interpretable evidence of offensive value.
+**Insight:** For first-time eligibles, improvement trajectories matter most. PA_change (year-over-year plate appearance growth) dominates, showing that panels reward players who earned more playing time. Traditional power metrics (HR, Total_Bases) remain critical, as arbitrators value tangible offensive production. WAR and BB round out the top 5, showing that overall value and plate discipline both factor into first-year awards.
 
 ![Horizontal bar chart showing feature importance for Arb 1 hitters](../assets/img/arbitration/hitters_arb1_feature_importance.png)
 
 **Pitchers (First Arbitration):**
-1. **SO (strikeouts):** Traditional counting stat
-2. **WAR:** Overall value metric
-3. **Starter:** Role classification crucial
-4. **SV (saves):** For relievers, defining their role
-5. **WAR_change:** Improvement trajectory matters
+1. **Starter:** Role classification (starter vs reliever)
+2. **WAR:** Overall value produced
+3. **SV (saves):** Relief pitcher role indicator
+4. **HLD (holds):** Setup reliever value recognition
+5. **WAR_change:** Year-over-year improvement
 
-**Insight:** Role definition (Starter vs reliever) is critical for first-time pitchers. Arbitration panels need context, a 2 WAR starter and a 2 WAR closer are valued differently. Traditional counting statistics (SO, SV) provide clear benchmarks. The appearance of WAR_change signals that improvement trajectories matter even for first-timers; showing development is valuable.
+**Insight:** Role classification absolutely dominates for first-time pitchers. Starter/reliever designation is the single most important factor, with importance nearly double that of WAR. This shows panels evaluate pitchers within role context first, then assess performance. For relievers, specific role indicators (SV for closers, HLD for setup men) provide clarity. WAR_change in the top 5 shows that improvement matters even for first-timers.
 
 ![Horizontal bar chart showing feature importance for Arb 1 pitchers](../assets/img/arbitration/pitchers_arb1_feature_importance.png)
 
 ### Arb 2: Establishing Track Record
 
 **Hitters (Second Arbitration):**
-1. **PA_per_game:** Consistency in playing time
-2. **Total_Bases**
-3. **HR_per_162**
-4. **Off (offensive runs above average):** Advanced metric gains importance
-5. **OPS:** Another advanced rate stat
+1. **WAR_change:** Year-over-year performance improvement
+2. **Off (offensive runs above average):** Advanced metric importance
+3. **BB (walks):** Plate discipline
+4. **PA_per_game:** Playing time consistency
+5. **Total_Bases:** Power production
 
-**Insight:** With one arbitration year completed, advanced metrics (Off, OPS) gain traction alongside traditional stats. Panels have seen these players before and are comfortable with more sophisticated evaluation. Consistency matters, PA_per_game remaining important shows that maintaining regular status is valued. Power production (Total_Bases, HR_per_162) continues as a premium.
+**Insight:** For second-year eligibles, improvement trajectories become paramount. WAR_change tops the list, showing panels heavily reward players who improved from their first arbitration year. Advanced metrics (Off) move into the top tier as panels gain comfort evaluating established players with sophisticated statistics. Plate discipline (BB) emerges as important, while playing time consistency (PA_per_game) and power (Total_Bases) remain valued.
 
 ![Horizontal bar chart showing feature importance for Arb 2 hitters](../assets/img/arbitration/hitters_arb2_feature_importance.png)
 
 **Pitchers (Second Arbitration):**
 1. **WAR:** Becomes dominant predictor
-2. **SO**
-3. **Starter**
-4. **SV**
+2. **SO (strikeouts):** Traditional counting stat
+3. **SV (saves):** Closer role definition
+4. **HLD (holds):** Setup reliever recognition
 5. **W (wins):** Traditional metric appears
 
-**Insight:** WAR takes over as the primary driver for second-year pitchers. With a track record established, panels weight overall value more heavily. Interestingly, wins (W) appear despite being team-dependent, arbitration panels still value traditional metrics. Role classification (Starter, SV) remains critical for context.
+**Insight:** WAR takes over as the primary driver for second-year pitchers, with nearly 40% of total importance. With a track record established, panels weight overall value most heavily. Traditional counting statistics (SO, W) and role-specific indicators (SV, HLD) round out the top 5. Interestingly, wins (W) appear despite being team-dependent—arbitration panels still value traditional metrics alongside advanced ones.
 
 ![Horizontal bar chart showing feature importance for Arb 2 pitchers](../assets/img/arbitration/pitchers_arb2_feature_importance.png)
 
 ### Arb 3: The Platform Year
 
 **Hitters (Third Arbitration):**
-1. **PA_per_game**
-2. **HR:** Power production premium
-3. **Total_Bases**
-4. **HR_per_162**
-5. **WAR_change:** Improvement crucial for FA positioning
+1. **WAR_change:** Year-over-year improvement
+2. **PA_per_game:** Playing time consistency
+3. **HR:** Power production
+4. **BB (walks):** Plate discipline
+5. **Off:** Advanced offensive metric
 
-**Insight:** Platform year dynamics differ from earlier arbitrations. Power (HR, Total_Bases) takes precedence as players position themselves for free agency, home runs are the most visible, marketable skill. WAR_change gains importance; teams and panels recognize that improvement trajectories affect upcoming free agent value. Showing development before free agency commands a premium.
+**Insight:** Platform year dynamics elevate improvement trajectories above all else. WAR_change tops the list as players positioning for free agency must demonstrate upward development. Playing time consistency (PA_per_game) remains critical—teams need to know players can handle full-time roles. Traditional power (HR) and advanced metrics (Off) both matter, while plate discipline (BB) shows sophistication in evaluation as players near free agency.
 
 ![Horizontal bar chart showing feature importance for Arb 3 hitters](../assets/img/arbitration/hitters_arb3_feature_importance.png)
 
 **Pitchers (Third Arbitration):**
 1. **WAR:** Overwhelming dominance
-2. **HLD (holds):** Setup reliever role valued
-3. **W**
-4. **SO**
-5. **SV**
+2. **SV (saves):** Closer role highly valued
+3. **WAR_change:** Improvement trajectory
+4. **IP_change:** Workload trend indicator
+5. **BB (walks):** Control metric
 
-**Insight:** WAR becomes the overwhelming predictor for platform-year pitchers. With comprehensive track records, panels defer to overall value metrics. The appearance of HLD (holds) shows that setup reliever roles are recognized and valued. Role specialization matters, as elite setup men command significant salaries even without closer save totals.
+**Insight:** WAR becomes the overwhelming predictor for platform-year pitchers, commanding nearly twice the importance of the second-place feature. With comprehensive track records, panels defer almost entirely to overall value metrics. Closer role (SV) ranks second, showing elite relievers command premiums. Notably, change metrics (WAR_change, IP_change) appear in the top 5, indicating panels assess development arcs as players approach free agency. Control (BB) represents the only traditional metric in the top tier.
 
 ![Horizontal bar chart showing feature importance for Arb 3 pitchers](../assets/img/arbitration/pitchers_arb3_feature_importance.png)
 
@@ -425,17 +425,19 @@ One of the most valuable insights comes from analyzing which features drive pred
 
 Several patterns emerge across all arbitration levels:
 
-1. **WAR Importance Increases With Experience:** WAR goes from one of several important metrics (Arb 1) to the dominant predictor (Arb 3). As players accumulate track records, comprehensive value metrics overshadow individual statistics.
+1. **Improvement Trajectories Dominate Throughout:** The most striking pattern is that change metrics (PA_change, WAR_change, IP_change) rank #1 at multiple arbitration levels for hitters. PA_change tops Arb 1, while WAR_change leads both Arb 2 and Arb 3. Panels heavily reward players showing year-over-year development, not just static performance levels.
 
-2. **Traditional Stats Never Disappear:** Despite analytics revolution in front offices, traditional counting statistics (HR, SO, SV, W) remain important throughout arbitration careers. Panels include non-statisticians who rely on familiar metrics.
+2. **WAR Importance Increases With Experience for Pitchers:** For pitchers, WAR rises from #2 at Arb 1 to #1 at Arb 2 and Arb 3, with overwhelming dominance by the platform year. Hitters show less consistent WAR patterns, likely because specific skills (power, discipline) carry distinct premiums.
 
-3. **Playing Time Consistency Always Matters:** PA_per_game (for hitters) appears in top features at every level. Reliability and durability are consistently valued, not just peak performance.
+3. **Role Definition Critical for Pitchers:** Starter/reliever classification is the single most important factor at Arb 1 (45% importance), then role-specific metrics (SV, HLD) dominate throughout. Panels evaluate pitchers within role context first, performance second.
 
-4. **Role Definition Critical for Pitchers:** Starter vs reliever classification matters at every arbitration level. Panels evaluate pitchers within role context, not against all pitchers universally.
+4. **Traditional Stats Persist Alongside Advanced Metrics:** Despite analytics adoption, traditional metrics (HR, BB, SV, W) appear in top 5 features at every level. Panels balance advanced evaluation (WAR, Off) with familiar benchmarks, showing decision-makers include both analytically-inclined and traditional evaluators.
 
-5. **Performance Trends Gain Importance:** WAR_change and other trend features become more important at higher arbitration levels. Improvement trajectories matter more for experienced players approaching free agency.
+5. **Plate Discipline Gains Recognition:** BB (walks) appears in top 5 for hitters at all three arbitration levels (Arb 1: #5, Arb 2: #3, Arb 3: #4), showing panels value patient hitters who control the strike zone beyond just raw power production.
 
-These patterns align with arbitration theory. Early-career players must prove they belong (hence playing time emphasis). Mid-career players get evaluated on comprehensive value (WAR rising). Late-career arbitration players position for free agency (power premium, improvement trajectories).
+6. **Playing Time Metrics Evolve:** For hitters, PA_per_game rises in importance from #6 at Arb 1 to #4 at Arb 2 and #2 at Arb 3, while PA_change dominates early (Arb 1 #1). Together, these show panels value both consistency and growth in opportunity.
+
+These patterns align with arbitration economics. Panels reward demonstrated improvement (change metrics dominate), evaluate within context (role matters for pitchers), and balance sophisticated analysis with traditional benchmarks. The validation of arbitration-level-specific modeling is clear: evaluation criteria genuinely differ by experience level.
 
 The feature importance analysis validates the arbitration-level-specific modeling approach, different levels genuinely have different evaluation criteria, justifying the modeling specialization when sample sizes permit.
 
