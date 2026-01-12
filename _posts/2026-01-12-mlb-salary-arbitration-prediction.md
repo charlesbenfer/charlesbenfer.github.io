@@ -665,31 +665,6 @@ Ultimately, arbitration salary prediction showcases how sophisticated analytics 
 - Notebooks: Jupyter notebooks for EDA, feature engineering, modeling, analysis
 - Reproducibility: Fixed random seeds, saved model objects, version-controlled code
 
-**Repository Structure:**
-```
-arbitration_analysis/
-├── data/
-│   ├── raw/               # Original data files
-│   ├── processed/         # Cleaned and merged datasets
-│   └── results/           # Model predictions and metrics
-├── notebooks/
-│   ├── 01_data_collection.ipynb
-│   ├── 02_data_cleaning.ipynb
-│   ├── 03_data_merging.ipynb
-│   ├── 04_exploratory_data_analysis.ipynb
-│   ├── 05_feature_engineering.ipynb
-│   ├── 06_feature_selection.ipynb
-│   ├── 07_modeling.ipynb
-│   ├── 08_position_specific_modeling.ipynb
-│   └── 09_arb_level_specific_modeling.ipynb
-└── src/
-    ├── data_collection.py
-    ├── preprocessing.py
-    ├── feature_engineering.py
-    └── modeling.py
-```
-
-All analysis code and data are available in the project repository, enabling full reproducibility of results and facilitating future extensions.
 
 ---
 
