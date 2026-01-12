@@ -10,11 +10,11 @@ author: Charles Benfer
 
 ## Project Overview
 
-Every winter, MLB teams and players navigate one of baseball's most complex financial processes: salary arbitration. This system determines billions of dollars in player compensation, yet remains notoriously difficult to predict. Arbitration panels consider a unique blend of traditional statistics, advanced metrics, service time, and precedent-setting cases—creating a challenge that's part statistics, part labor economics, and part art.
+Every winter, MLB teams and players navigate one of baseball's most complex financial processes: salary arbitration. This system determines billions of dollars in player compensation, yet remains notoriously difficult to predict. Arbitration panels consider a unique blend of traditional statistics, advanced metrics, service time, and precedent-setting cases, creating a challenge that's part statistics, part labor economics, and part art.
 
 I built a comprehensive machine learning system to predict arbitration salaries, analyzing 868 hitters and 1,147 pitchers from 2016-2026. The project explores three distinct modeling approaches: general models for all players, position-specific models, and arbitration-level-specific models. The results reveal surprising insights about what works, what doesn't, and why traditional approaches sometimes fail spectacularly.
 
-The key finding? While general models provide excellent baseline predictions with strong generalization, arbitration-level-specific models can outperform them significantly for early-career players—achieving R² scores above 0.86 for first-time eligible pitchers. Meanwhile, position-specific models, despite their theoretical appeal, failed catastrophically due to fundamental sample size constraints.
+The key finding? While general models provide excellent baseline predictions with strong generalization, arbitration-level-specific models can outperform them significantly for early-career players, achieving R² scores above 0.86 for first-time eligible pitchers. Meanwhile, position-specific models, despite their theoretical appeal, failed catastrophically due to fundamental sample size constraints.
 
 ## Understanding Baseball's Arbitration System
 
@@ -22,9 +22,9 @@ The key finding? While general models provide excellent baseline predictions wit
 
 MLB's salary arbitration system provides a structured process for determining player salaries before they reach free agency. Players become eligible after accumulating three years of Major League service time, giving them the right to have their salary determined by an arbitration panel if they cannot reach an agreement with their team.
 
-However, a special class of players—dubbed "Super Two"—gains eligibility after just two years. Super Two status is awarded to the top 22% of players in the 2-3 year service time bracket, ranked by days of service. This designation is valuable: it grants an extra year of salary arbitration, potentially worth millions over a career.
+However, a special class of players, dubbed "Super Two", gains eligibility after just two years. Super Two status is awarded to the top 22% of players in the 2-3 year service time bracket, ranked by days of service. This designation is valuable: it grants an extra year of salary arbitration, potentially worth millions over a career.
 
-The arbitration process itself follows a "final offer" format. If a player and team cannot agree on a salary, both sides submit their proposed figure to a three-person arbitration panel. The panel hears evidence and arguments, then must choose one of the two submitted salaries—they cannot compromise or select a middle value. This high-stakes format creates strong incentives for both sides to be reasonable, which is why 94% of cases settle without going to a hearing.
+The arbitration process itself follows a "final offer" format. If a player and team cannot agree on a salary, both sides submit their proposed figure to a three-person arbitration panel. The panel hears evidence and arguments, then must choose one of the two submitted salaries. They cannot compromise or select a middle value. This high-stakes format creates strong incentives for both sides to be reasonable, which is why 94% of cases settle without going to a hearing.
 
 ### Why Predictions Matter
 
@@ -57,7 +57,7 @@ The median hitter earned $3.2 million while pitchers earned $2.25 million, thoug
 Building a comprehensive arbitration dataset required merging two distinct data sources:
 
 **Arbitration Outcomes (MLB Trade Rumors):**
-The arbitration salary database provided player names, positions, teams, arbitration level, settlement amounts, and whether cases went to hearing. This created the target variable—the salary we're trying to predict—along with key contextual information about service time and arbitration status.
+The arbitration salary database provided player names, positions, teams, arbitration level, settlement amounts, and whether cases went to hearing. This created the target variable, the salary we're trying to predict, along with key contextual information about service time and arbitration status.
 
 **Performance Statistics (FanGraphs via pybaseball):**
 For each player-year, I collected comprehensive performance data from FanGraphs. This included traditional statistics (HR, RBI, W, ERA), advanced metrics (WAR, wRC+, FIP), and plate discipline/quality of contact statistics (BB%, K%, ISO, BABIP). The pybaseball package provided programmatic access to FanGraphs data, enabling automated collection for all players.
@@ -69,7 +69,7 @@ Matching players between datasets proved more challenging than expected. Player 
 
 **Salary Distributions and Trends:**
 
-The salary data exhibits strong right-skewness—most players cluster in the $1-4 million range, while outliers like Mike Trout ($30+ million in his final arbitration year) pull the mean higher than the median. This distribution reflects arbitration's structure: first-time eligible players start relatively low, but salaries can escalate dramatically for superstars by their third or fourth year.
+The salary data exhibits strong right-skewness. Most players cluster in the $1-4 million range, while outliers like Mike Trout ($30+ million in his final arbitration year) pull the mean higher than the median. This distribution reflects arbitration's structure: first-time eligible players start relatively low, but salaries can escalate dramatically for superstars by their third or fourth year.
 
 ![Box plots showing salary distributions by arbitration level and position](../assets/img/arbitration/08_salary_by_arb_level.png)
 
@@ -77,7 +77,7 @@ Over the 2016-2025 period, salary growth was surprisingly modest: hitters saw 1.
 
 **Position Patterns:**
 
-Position matters significantly for hitters. First basemen commanded the highest median salaries ($4.80M), followed by corner outfielders. Catchers, despite their defensive importance, earned the lowest median ($2.05M)—likely reflecting that hitting statistics drive arbitration awards and catchers tend to be weaker offensively. Middle infielders (2B, SS) fell in the middle of the distribution.
+Position matters significantly for hitters. First basemen commanded the highest median salaries ($4.80M), followed by corner outfielders. Catchers, despite their defensive importance, earned the lowest median ($2.05M), likely reflecting that hitting statistics drive arbitration awards and catchers tend to be weaker offensively. Middle infielders (2B, SS) fell in the middle of the distribution.
 
 ![Bar chart of median salary by position](../assets/img/arbitration/03_salary_by_position.png)
 
@@ -85,7 +85,7 @@ For pitchers, the starter/reliever distinction proved critical. Starting pitcher
 
 **Performance Metric Correlations:**
 
-WAR (Wins Above Replacement) emerged as the strongest single predictor of salary for both hitters (r=0.571) and pitchers (r=0.624). This makes intuitive sense—WAR attempts to capture overall player value in a single number, exactly what arbitration panels aim to assess.
+WAR (Wins Above Replacement) emerged as the strongest single predictor of salary for both hitters (r=0.571) and pitchers (r=0.624). This makes intuitive sense, as WAR attempts to capture overall player value in a single number, exactly what arbitration panels aim to assess.
 
 However, the relatively modest correlation coefficients (explaining only 33-39% of salary variance) highlight that arbitration isn't purely about performance. Service time, arbitration level, position, and precedent all play major roles. A 2-WAR player in their first arbitration year earns far less than a 2-WAR player in their third year.
 
@@ -116,7 +116,7 @@ Drawing from my previous work on free agent similarity systems, I built comparab
 3. Extracts their arbitration salaries and statistics
 4. Computes aggregate measures: median comp salary, mean comp salary, similarity scores, comp WAR values
 
-This approach mimics how arbitration cases actually work—both sides present comparable players to support their salary arguments. However, this feature set comes with limitations: it only works for 2017+ data (needing prior year precedents) and 27% of cases lack good comparable players due to unusual profiles.
+This approach mimics how arbitration cases actually work. Both sides present comparable players to support their salary arguments. However, this feature set comes with limitations: it only works for 2017+ data (needing prior year precedents) and 27% of cases lack good comparable players due to unusual profiles.
 
 The comparable player features proved moderately predictive but created circular dependencies: we're using past arbitration outcomes to predict future ones. This isn't necessarily wrong (precedent matters in arbitration), but it means the model relies partially on the very process it's trying to predict.
 
@@ -167,7 +167,7 @@ Some of the most important predictors aren't performance statistics at all:
 - **Age_arb:** Player age at time of arbitration
 - **Year_Since_2016:** Years since 2016, capturing inflation trends
 
-Service time and arbitration level proved enormously predictive. The same player profile can command dramatically different salaries depending on whether it's their first or third arbitration year. Platform years (Arb 3+) carry particular weight—teams know players are one year from free agency and adjust valuations accordingly.
+Service time and arbitration level proved enormously predictive. The same player profile can command dramatically different salaries depending on whether it's their first or third arbitration year. Platform years (Arb 3+) carry particular weight. Teams know players are one year from free agency and adjust valuations accordingly.
 
 ### Feature Selection Process
 
@@ -216,7 +216,7 @@ This approach faced immediate sample size challenges:
 - Designated hitters: 24 samples
 - Most positions: 50-136 samples
 
-With 16 features per model, this created samples-per-feature ratios between 3:1 and 10:1—far below the generally recommended 10-20:1 minimum for stable model training.
+With 16 features per model, this created samples-per-feature ratios between 3:1 and 10:1, far below the generally recommended 10-20:1 minimum for stable model training.
 
 ### Strategy 3: Arbitration-Level-Specific Models
 
@@ -230,7 +230,7 @@ Sample sizes by arbitration level:
 
 These sample sizes, while smaller than the general approach, still provide adequate ratios for the 11-17 features selected per level through level-specific feature selection.
 
-I conducted level-specific feature selection, using Random Forest importance scores to identify the top predictors for each arbitration level separately. This revealed that different features matter at different career stages—a finding that became central to understanding model performance.
+I conducted level-specific feature selection, using Random Forest importance scores to identify the top predictors for each arbitration level separately. This revealed that different features matter at different career stages, a finding that became central to understanding model performance.
 
 ![Flowchart showing the three modeling strategies and their sample sizes](../assets/img/arbitration/modeling_strategies_flowchart.png)
 
@@ -258,7 +258,7 @@ The general models serve as an excellent baseline for any arbitration prediction
 
 ### Position-Specific Models: A Cautionary Tale
 
-The position-specific models failed spectacularly, providing one of the most important lessons from this project. Despite the logical appeal of position-specific modeling—different positions have different offensive expectations—the approach collapsed due to fundamental sample size constraints.
+The position-specific models failed spectacularly, providing one of the most important lessons from this project. Despite the logical appeal of position-specific modeling, since different positions have different production expectations, the approach collapsed due to fundamental sample size constraints.
 
 **The Overfitting Disaster:**
 
@@ -287,17 +287,17 @@ The failure stems from violating fundamental machine learning principles:
 
 Interestingly, position-specific feature importance analysis *did* reveal meaningful patterns. Catchers showed higher importance for power metrics (HR, ISO) than middle infielders. Shortstops weighted defensive metrics more heavily. These insights are real and valuable.
 
-The paradox: position-specific *feature importance* differs meaningfully, but position-specific *models* still fail due to sample size. The solution isn't to ignore position—it's to keep it as a feature in general models rather than splitting into separate model families.
+The paradox: position-specific *feature importance* differs meaningfully, but position-specific *models* still fail due to sample size. The solution isn't to ignore position, but to keep it as a feature in general models rather than splitting into separate model families.
 
 **Lessons Learned:**
 
-This failure demonstrates a critical principle: **theoretical appeal doesn't override statistical reality**. Position-specific models make intuitive sense, but intuition must yield to evidence when sample sizes are inadequate. This is a common trap in sports analytics—splitting data into increasingly fine-grained subgroups until models collapse.
+This failure demonstrates a critical principle: **theoretical appeal doesn't override statistical reality**. Position-specific models make intuitive sense, but intuition must yield to evidence when sample sizes are inadequate. This is a common trap in sports analytics, splitting data into increasingly fine-grained subgroups until models collapse.
 
 The position-specific failure actually strengthens the overall project. Negative results are valuable when they're well-documented and the causes are understood. Future work can learn from this failure rather than repeating it.
 
 ### Arbitration-Level-Specific Models: Finding the Sweet Spot
 
-The arbitration-level-specific models tell a more nuanced story. While they don't universally dominate general models, they significantly outperform for certain subgroups—particularly early-career players where sample sizes remain adequate.
+The arbitration-level-specific models tell a more nuanced story. While they don't universally dominate general models, they significantly outperform for certain subgroups, particularly early-career players where sample sizes remain adequate.
 
 **Best Performers by Level:**
 
@@ -319,11 +319,11 @@ The arbitration-level-specific models tell a more nuanced story. While they don'
 
 The arbitration-level approach shines brightest for **Arb 1 pitchers** (R²=0.861) and **Arb 2 hitters** (R²=0.776). These results suggest that for players with sufficient sample sizes (240+ cases), level-specific modeling captures meaningful differences in salary determinants that general models miss.
 
-The Arb 1 pitcher model's performance is particularly impressive. With 470 training samples and level-specific feature selection identifying 11 key features, the model achieves a samples-per-feature ratio of 43:1—well above recommended thresholds. The resulting predictions have RMSE of just $397K on salaries averaging $2M, representing ~20% average error.
+The Arb 1 pitcher model's performance is particularly impressive. With 470 training samples and level-specific feature selection identifying 11 key features, the model achieves a samples-per-feature ratio of 43:1, well above recommended thresholds. The resulting predictions have RMSE of just $397K on salaries averaging $2M, representing ~20% average error.
 
 **Where They Struggle:**
 
-Performance degrades at higher arbitration levels, particularly Arb 3. This isn't model failure—it's a sample size/salary range interaction:
+Performance degrades at higher arbitration levels, particularly Arb 3. This isn't model failure, it's a sample size/salary range interaction:
 
 1. **Smaller Samples:** Arb 3 has roughly half the cases of Arb 1 (185 vs 379 hitters)
 2. **Higher Salary Variance:** Arb 3 salaries range from $1M to $15M+ as star players earn massive raises while average players get modest bumps
@@ -367,7 +367,7 @@ One of the most valuable insights comes from analyzing which features drive pred
 4. **SV (saves):** For relievers, defining their role
 5. **WAR_change:** Improvement trajectory matters
 
-**Insight:** Role definition (Starter vs reliever) is critical for first-time pitchers. Arbitration panels need context—a 2 WAR starter and a 2 WAR closer are valued differently. Traditional counting statistics (SO, SV) provide clear benchmarks. The appearance of WAR_change signals that improvement trajectories matter even for first-timers; showing development is valuable.
+**Insight:** Role definition (Starter vs reliever) is critical for first-time pitchers. Arbitration panels need context, a 2 WAR starter and a 2 WAR closer are valued differently. Traditional counting statistics (SO, SV) provide clear benchmarks. The appearance of WAR_change signals that improvement trajectories matter even for first-timers; showing development is valuable.
 
 ![Horizontal bar chart showing feature importance for Arb 1 pitchers](../assets/img/arbitration/pitchers_arb1_feature_importance.png)
 
@@ -380,7 +380,7 @@ One of the most valuable insights comes from analyzing which features drive pred
 4. **Off (offensive runs above average):** Advanced metric gains importance
 5. **OPS:** Another advanced rate stat
 
-**Insight:** With one arbitration year completed, advanced metrics (Off, OPS) gain traction alongside traditional stats. Panels have seen these players before and are comfortable with more sophisticated evaluation. Consistency matters—PA_per_game remaining important shows that maintaining regular status is valued. Power production (Total_Bases, HR_per_162) continues as a premium.
+**Insight:** With one arbitration year completed, advanced metrics (Off, OPS) gain traction alongside traditional stats. Panels have seen these players before and are comfortable with more sophisticated evaluation. Consistency matters, PA_per_game remaining important shows that maintaining regular status is valued. Power production (Total_Bases, HR_per_162) continues as a premium.
 
 ![Horizontal bar chart showing feature importance for Arb 2 hitters](../assets/img/arbitration/hitters_arb2_feature_importance.png)
 
@@ -391,7 +391,7 @@ One of the most valuable insights comes from analyzing which features drive pred
 4. **SV**
 5. **W (wins):** Traditional metric appears
 
-**Insight:** WAR takes over as the primary driver for second-year pitchers. With a track record established, panels weight overall value more heavily. Interestingly, wins (W) appear despite being team-dependent—arbitration panels still value traditional metrics. Role classification (Starter, SV) remains critical for context.
+**Insight:** WAR takes over as the primary driver for second-year pitchers. With a track record established, panels weight overall value more heavily. Interestingly, wins (W) appear despite being team-dependent, arbitration panels still value traditional metrics. Role classification (Starter, SV) remains critical for context.
 
 ![Horizontal bar chart showing feature importance for Arb 2 pitchers](../assets/img/arbitration/pitchers_arb2_feature_importance.png)
 
@@ -404,7 +404,7 @@ One of the most valuable insights comes from analyzing which features drive pred
 4. **HR_per_162**
 5. **WAR_change:** Improvement crucial for FA positioning
 
-**Insight:** Platform year dynamics differ from earlier arbitrations. Power (HR, Total_Bases) takes precedence as players position themselves for free agency—home runs are the most visible, marketable skill. WAR_change gains importance; teams and panels recognize that improvement trajectories affect upcoming free agent value. Showing development before free agency commands a premium.
+**Insight:** Platform year dynamics differ from earlier arbitrations. Power (HR, Total_Bases) takes precedence as players position themselves for free agency, home runs are the most visible, marketable skill. WAR_change gains importance; teams and panels recognize that improvement trajectories affect upcoming free agent value. Showing development before free agency commands a premium.
 
 ![Horizontal bar chart showing feature importance for Arb 3 hitters](../assets/img/arbitration/hitters_arb3_feature_importance.png)
 
@@ -415,7 +415,7 @@ One of the most valuable insights comes from analyzing which features drive pred
 4. **SO**
 5. **SV**
 
-**Insight:** WAR becomes the overwhelming predictor for platform-year pitchers. With comprehensive track records, panels defer to overall value metrics. The appearance of HLD (holds) shows that setup reliever roles are recognized and valued. Role specialization matters—elite setup men command significant salaries even without closer save totals.
+**Insight:** WAR becomes the overwhelming predictor for platform-year pitchers. With comprehensive track records, panels defer to overall value metrics. The appearance of HLD (holds) shows that setup reliever roles are recognized and valued. Role specialization matters, as elite setup men command significant salaries even without closer save totals.
 
 ![Horizontal bar chart showing feature importance for Arb 3 pitchers](../assets/img/arbitration/pitchers_arb3_feature_importance.png)
 
@@ -435,7 +435,7 @@ Several patterns emerge across all arbitration levels:
 
 These patterns align with arbitration theory. Early-career players must prove they belong (hence playing time emphasis). Mid-career players get evaluated on comprehensive value (WAR rising). Late-career arbitration players position for free agency (power premium, improvement trajectories).
 
-The feature importance analysis validates the arbitration-level-specific modeling approach—different levels genuinely have different evaluation criteria, justifying the modeling specialization when sample sizes permit.
+The feature importance analysis validates the arbitration-level-specific modeling approach, different levels genuinely have different evaluation criteria, justifying the modeling specialization when sample sizes permit.
 
 ## Limitations and Future Directions
 
@@ -445,15 +445,15 @@ Despite strong model performance, several fundamental limitations constrain this
 
 **Time Window (2015 Forward):**
 
-Complete arbitration outcome data paired with comprehensive statistics only extends back to 2015 in my dataset. This creates a relatively short historical window—just 11 seasons—for establishing precedent patterns. Earlier arbitration cases from the 2000s and 2010s may have influenced current standards, but those precedents aren't captured in the training data.
+Complete arbitration outcome data paired with comprehensive statistics only extends back to 2015 in my dataset. This creates a relatively short historical window, just 11 seasons, for establishing precedent patterns. Earlier arbitration cases from the 2000s and 2010s may have influenced current standards, but those precedents aren't captured in the training data.
 
 The 2015 starting point reflects data availability constraints rather than a deliberate choice. MLB Trade Rumors' comprehensive arbitration database begins around this period, and FanGraphs' advanced metrics became standardized in the mid-2010s. Earlier data exists but requires more extensive collection efforts and may lack consistent advanced statistics.
 
 **Comparable Player Data Gaps:**
 
-The comparable player features suffer from a chicken-and-egg problem: they require historical arbitration outcomes to generate, which means the first year (2016) has no precedent data. Additionally, 27% of player-years lack good comparable matches—either because the player profile is unusual (switch-hitting power catcher with speed) or because their arbitration year occurred too early in the dataset.
+The comparable player features suffer from a chicken-and-egg problem: they require historical arbitration outcomes to generate, which means the first year (2016) has no precedent data. Additionally, 27% of player-years lack good comparable matches, either because the player profile is unusual (switch-hitting power catcher with speed) or because their arbitration year occurred too early in the dataset.
 
-This missing data isn't random. Unique players lacking comps are often the most interesting cases—rule-breaking talents or unusual statistical profiles. Models trained without comp features for these players may miss crucial market precedent information.
+This missing data isn't random. Unique players lacking comps are often the most interesting cases, rule-breaking talents or unusual statistical profiles. Models trained without comp features for these players may miss crucial market precedent information.
 
 **Small Samples for Subgroups:**
 
@@ -470,7 +470,7 @@ These small-sample limitations prevent deeper segmentation. Ideally, we'd model 
 
 **Repeated Measures Problem:**
 
-The dataset violates a fundamental assumption of standard regression: independent observations. The same players appear multiple years as they progress through arbitration (Arb 1, Arb 2, Arb 3). Player A's Arb 2 salary is not independent of their Arb 1 salary—panels consider previous arbitration awards.
+The dataset violates a fundamental assumption of standard regression: independent observations. The same players appear multiple years as they progress through arbitration (Arb 1, Arb 2, Arb 3). Player A's Arb 2 salary is not independent of their Arb 1 salary, panels consider previous arbitration awards.
 
 This repeated measures structure has implications:
 
@@ -513,7 +513,7 @@ Small-market teams facing budget constraints may settle lower than large-market 
 Some agents consistently secure better outcomes for their clients. Agent reputation, negotiation skill, and case preparation quality matter but aren't captured. Adding agent fixed effects could improve predictions but requires agent identification data.
 
 **Hearing vs Settlement Selection:**
-Only 6% of cases go to hearing. These aren't a random sample—they're cases where the gap between positions was too large to bridge. Models predict settled outcomes for the 94%, but actual hearing outcomes may have different drivers. Panels that must choose between two submitted values face different incentives than parties negotiating settlements.
+Only 6% of cases go to hearing. These aren't a random sample, they're cases where the gap between positions was too large to bridge. Models predict settled outcomes for the 94%, but actual hearing outcomes may have different drivers. Panels that must choose between two submitted values face different incentives than parties negotiating settlements.
 
 ### Future Research Directions
 
@@ -541,7 +541,7 @@ Add year-level features capturing market conditions: average MLB salary, revenue
 Implement prediction intervals (not just point predictions) using bootstrap or Bayesian methods. Provide 80% prediction intervals to capture outcome uncertainty.
 
 **8. Ensemble Approaches:**
-Combine general and arb-level-specific model predictions using weighted averaging or stacking. This might capture benefits of both approaches—general model stability with level-specific nuance.
+Combine general and arb-level-specific model predictions using weighted averaging or stacking. This might capture benefits of both approaches, general model stability with level-specific nuance.
 
 **9. Time Series Cross-Validation:**
 Use walk-forward validation (training on years 1-N, testing on year N+1) to better simulate real-world prediction scenarios. Current single-year test set (2026) may not represent general performance.
@@ -558,7 +558,7 @@ Beyond academic interest, accurate arbitration predictions serve multiple real-w
 ### For MLB Front Offices
 
 **Budget Planning and Payroll Projections:**
-Teams enter each offseason knowing they have 5-10 arbitration-eligible players with uncertain salaries. Accurate predictions enable realistic budget forecasting months in advance. If models predict a team's arbitration class will cost $25-30 million, the front office can plan accordingly—allocating resources to free agency, setting ticket prices, and projecting profitability.
+Teams enter each offseason knowing they have 5-10 arbitration-eligible players with uncertain salaries. Accurate predictions enable realistic budget forecasting months in advance. If models predict a team's arbitration class will cost $25-30 million, the front office can plan accordingly, allocating resources to free agency, setting ticket prices, and projecting profitability.
 
 **Non-Tender Decisions:**
 Teams must decide by early December whether to tender contracts to arbitration-eligible players. If a model predicts a replacement-level player will earn $3.5 million through arbitration, the team can objectively evaluate whether that price justifies keeping them versus pursuing cheaper alternatives. Data-driven non-tender decisions prevent paying above-market rates for marginal players.
@@ -572,7 +572,7 @@ When considering trades involving arbitration-eligible players, teams need to as
 Agents use comparable player data to argue their client deserves specific salaries. A model showing that similar players earned $4-6 million creates a data-driven negotiating range. Rather than arbitrary asking prices, agents can cite quantitative evidence: "Based on performance metrics, arbitration precedent, and market conditions, our model projects $5.2 million."
 
 **Filing Number Strategy:**
-Both sides must submit salary figures if a case heads to hearing. Models help determine optimal filing numbers—high enough to be aspirational but realistic enough that panels won't view them as unreasonable.
+Both sides must submit salary figures if a case heads to hearing. Models help determine optimal filing numbers, high enough to be aspirational but realistic enough that panels won't view them as unreasonable.
 
 **Career Planning:**
 Players approaching arbitration can use projections to make informed decisions about multi-year extensions vs taking arbitration year-by-year. If projections show arbitration will likely yield $15 million over three years, a team offer of $20 million over five years provides context for evaluation.
@@ -580,7 +580,7 @@ Players approaching arbitration can use projections to make informed decisions a
 ### For Media and Analysts
 
 **Context for Roster Moves:**
-When teams make surprising decisions—non-tendering a productive player, trading an arbitration-eligible asset—salary projections explain why. "Player X was productive but projected to earn $6 million, making him too expensive for the rebuilding team's budget."
+When teams make surprising decisions, like non-tendering a productive player or trading an arbitration-eligible asset, salary projections explain why. "Player X was productive but projected to earn $6 million, making him too expensive for the rebuilding team's budget."
 
 **Market Trend Analysis:**
 Tracking model predictions vs actual outcomes over time reveals market trends. Are power hitters commanding premiums? Is starting pitching getting cheaper? Models provide quantitative evidence for these narratives.
@@ -610,7 +610,7 @@ This comprehensive analysis of MLB salary arbitration demonstrates that machine 
 
 2. **Arbitration-Level Specialization Works for Arb 1-2:** When sample sizes permit (240+ cases), level-specific models outperform general approaches. The Arb 1 pitcher model (R²=0.861) and Arb 2 hitter model (R²=0.776) represent meaningful improvements over baselines, capturing how salary determinants evolve with experience.
 
-3. **Position-Specific Models Fail Catastrophically:** Despite theoretical appeal, position-specific modeling collapses due to insufficient sample sizes. With 35-136 players per position, models overfit training data (R²>0.99) but fail completely on test data (8,000%+ RMSE gaps). This negative finding is crucial—it warns against excessive segmentation when data can't support it.
+3. **Position-Specific Models Fail Catastrophically:** Despite theoretical appeal, position-specific modeling collapses due to insufficient sample sizes. With 35-136 players per position, models overfit training data (R²>0.99) but fail completely on test data (8,000%+ RMSE gaps). This negative finding is crucial, as it warns against excessive segmentation when data can't support it.
 
 4. **Feature Importance Evolves by Experience:** Playing time and traditional counting stats matter most for first-time eligibles, while WAR and comprehensive value metrics dominate by third arbitration year. Understanding these patterns helps explain panel decisions and guides feature engineering.
 
@@ -620,13 +620,13 @@ This comprehensive analysis of MLB salary arbitration demonstrates that machine 
 
 Baseball arbitration represents a unique intersection of statistics, economics, and labor relations. Unlike free agency where markets determine value, arbitration involves panels making structured decisions based on performance metrics, precedent, and argumentation. This creates both challenges and opportunities for predictive modeling.
 
-The analysis demonstrates that machine learning succeeds at this task—but also shows that naive approaches (like position-specific modeling) can fail spectacularly despite intuitive appeal. Good modeling requires balancing theoretical sophistication against practical data constraints. Sometimes simpler approaches (general models) outperform complex ones (position-specific) because they respect fundamental sample size requirements.
+The analysis demonstrates that machine learning succeeds at this task, but also shows that naive approaches (like position-specific modeling) can fail spectacularly despite intuitive appeal. Good modeling requires balancing theoretical sophistication against practical data constraints. Sometimes simpler approaches (general models) outperform complex ones (position-specific) because they respect fundamental sample size requirements.
 
-For practitioners—whether front office analysts, agents, or media—these models provide actionable salary projections to inform multi-million dollar decisions. For researchers, the analysis offers methodological lessons about when specialization helps versus hurts predictive performance.
+For practitioners, whether front office analysts, agents, or media, these models provide actionable salary projections to inform multi-million dollar decisions. For researchers, the analysis offers methodological lessons about when specialization helps versus hurts predictive performance.
 
 **Looking Forward:**
 
-Arbitration prediction remains an active research area as salary structures evolve, collective bargaining agreements change, and new performance metrics emerge. The framework established here—combining comparable player features, performance trends, and experience-level specialization—provides a foundation for continued refinement.
+Arbitration prediction remains an active research area as salary structures evolve, collective bargaining agreements change, and new performance metrics emerge. The framework established here, combining comparable player features, performance trends, and experience-level specialization, provides a foundation for continued refinement.
 
 Future analysts can build on this work by extending historical data, implementing mixed-effects models, incorporating additional context (agent effects, market conditions), and potentially training separate models for settlements vs hearings. Each extension addresses specific limitations while leveraging the core insights about feature engineering and modeling strategy.
 
