@@ -222,13 +222,13 @@ With 16 features per model, this created samples-per-feature ratios between 3:1 
 
 ### Strategy 3: Arbitration-Level-Specific Models
 
-Train separate models for each arbitration level (Arb 1, Arb 2, Arb 3, Arb 4+), with Super Two players included in their respective arbitration year. The hypothesis: salary determinants differ by experience level. First-time eligibles need to prove themselves, while third-year players with track records are evaluated differently.
+Train separate models for each arbitration level (Arb 1, Arb 2, Arb 3), with Super Two players included in their respective arbitration year. The hypothesis: salary determinants differ by experience level. First-time eligibles need to prove themselves, while third-year players with track records are evaluated differently. Note that Arb 4 exists only for Super Two players (who have an extra year), but sample sizes proved insufficient for separate modeling.
 
 Sample sizes by arbitration level:
 - **Arb 1 (including Super Two):** 379 hitters, 470 pitchers
 - **Arb 2 (including Super Two):** 263 hitters, 370 pitchers
 - **Arb 3 (including Super Two):** 185 hitters, 264 pitchers
-- **Arb 4+:** 41 hitters, 46 pitchers (insufficient for modeling)
+- **Arb 4 (Super Two only):** 41 hitters, 46 pitchers (insufficient for modeling)
 
 These sample sizes, while smaller than the general approach, still provide adequate ratios for the 11-17 features selected per level through level-specific feature selection.
 
@@ -463,7 +463,7 @@ This missing data isn't random. Unique players lacking comps are often the most 
 
 While overall sample sizes are adequate (868 hitters, 1,147 pitchers), specific subgroups have concerning limitations:
 
-- **Arb 4+ players:** Only 41 hitters, 46 pitchers (insufficient for modeling)
+- **Arb 4 players (Super Two only):** Only 41 hitters, 46 pitchers (insufficient for modeling)
 - **Individual positions:** 35-136 samples per position (caused position-specific model failure)
 - **Super Two players:** Subgroup analyses underpowered
 - **Hearing outcomes:** Only 6% go to hearing (~120 cases total), too few for separate modeling
