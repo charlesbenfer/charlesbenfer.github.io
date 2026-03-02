@@ -2,7 +2,7 @@
 layout: post
 title: Predicting PGA Tour Outcomes with XGBoost and Monte Carlo Simulation
 subtitle: Building a Full-Stack Golf Prediction System with 91 Features, Rolling Form Signals, and Live Betting Integration
-thumbnail-img:
+thumbnail-img:../assets/img/shap_top20.png 
 share-img:
 tags: Sports-Analytics, Golf, Machine-Learning, XGBoost, Feature-Engineering, Sports-Betting, Monte-Carlo
 author: Charles Benfer
