@@ -123,12 +123,14 @@ The intuitive idea: train a separate XGBoost model for each tournament, so the m
 
 In practice, it failed comprehensively. Each tournament has ~100 players × 8–10 historical years = ~800–1,000 training rows. The global model had ~38,000 rows. Data starvation produced models that couldn't generalize:
 
-| Target | Global AUC | Per-Tournament AUC | Δ |
-|--------|-----------|-------------------|---|
-| made_cut | 0.678 | 0.673 | −0.005 |
-| top_20 | 0.723 | 0.659 | **−0.064** |
-| top_10 | 0.730 | 0.627 | **−0.103** |
-| percentile | 0.297 (ρ) | 0.247 (ρ) | **−0.050** |
+Numbers below are averaged across six early-season 2024–25 events (Sony Open, American Express, Farmers Insurance, WM Phoenix Open, AT&T Pebble Beach, Genesis Invitational):
+
+| Target | Global AUC (avg) | Per-Tournament AUC (avg) | Δ |
+|--------|-----------------|--------------------------|---|
+| made_cut | 0.584 | 0.580 | −0.005 |
+| top_20 | 0.673 | 0.610 | **−0.064** |
+| top_10 | 0.654 | 0.551 | **−0.103** |
+| percentile (ρ) | 0.294 | 0.244 | **−0.050** |
 
 The global model's `tournament_encoded` feature already captures average difficulty differences between events. Course-specific player fit is better handled through the course SG signature features than through separate models. The per-tournament experiment is archived in `notebooks/archive/`.
 
@@ -175,13 +177,13 @@ The four models produce probabilities, but bettors need win probabilities. No cl
 I added a Monte Carlo simulation layer on top of the models:
 
 1. For each player, the percentile model predicts their expected finish percentile.
-2. 10,000 simulations are run per field. In each simulation:
+2. 100,000 simulations are run per field. In each simulation:
    - Each player's cut is drawn from a Bernoulli with `p = p_made_cut`
    - Each player who makes the cut draws a performance score from `N(pred_pct, σ²)`
    - Players who miss the cut receive a penalty score of 100.0
 3. The player with the lowest simulated score wins that simulation. Win probability = fraction of simulations won.
 
-The noise parameter σ = 0.274 was estimated empirically as the standard deviation of `(predicted_percentile − actual_percentile)` on 2024–25 cut-makers. This calibrates the simulation to match the observed prediction uncertainty. Spearman ρ = 0.33 between predicted and actual percentile on the test set.
+The noise parameter σ = 0.2121 was estimated empirically as the standard deviation of `(predicted_percentile − actual_percentile)` on 2024–25 cut-makers. This calibrates the simulation to match the observed prediction uncertainty. Spearman ρ = 0.33 between predicted and actual percentile on the test set.
 
 The MC simulation doesn't improve AUC (it's a transformation on top of existing model outputs), but it adds something the classifiers can't provide: **win probabilities**. These are essential for expected value calculations in betting.
 
@@ -211,7 +213,7 @@ The Odds API — a popular aggregator — was evaluated but found to only cover 
 
 The model was retroactively evaluated against seven completed 2026 events. Predictions were made using the actual 2026 field (players who entered the tournament) and 2025 statistics as features — the same pipeline used for forward predictions.
 
-### Per-Tournament Results (ranked by mc_win_prob)
+### Per-Tournament Validation Results
 
 | Tournament | P@10 | P@20 | Winner Rank |
 |-----------|------|------|-------------|
