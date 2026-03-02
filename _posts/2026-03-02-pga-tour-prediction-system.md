@@ -291,4 +291,18 @@ The code is available at [https://github.com/charlesbenfer/PGA_Prediction_Tools]
 
 ---
 
+## What's Next: Improving the Percentile Finish Regressor
+
+The classifier models (made_cut, top_20, top_10) are performing reasonably well. The weakest link in the system is the **percentile finish regressor** — Spearman ρ = 0.297 on the test set, meaning the model explains less than 10% of the variance in where a player actually finishes within the field. This is the input that drives the Monte Carlo simulation, so improving it would directly improve win probability estimates.
+
+A few directions worth exploring:
+
+- **Better target engineering**: percentile finish compresses a lot of information into a single number. Separating the problem into "will this player finish in the top half of the field?" and "given they're in the top half, how high?" may give the model more tractable sub-problems to solve.
+- **Quantile regression**: rather than predicting a single expected percentile, training separate models for the 25th, 50th, and 75th quantiles would give a fuller picture of each player's outcome distribution — useful for bet sizing under uncertainty.
+- **Tournament-week context features**: field strength varies significantly week to week. A player's expected finish percentile against a major field is different from the same player against a low-key fall event, even controlling for `tournament_encoded`. Explicit field-strength features (mean SG of the field, number of top-50 players entered) may sharpen predictions.
+
+The regressor is where the most headroom remains in the system, and it's the next area of focus.
+
+---
+
 *If you're working in sports analytics and want to discuss the methodology or compare notes, feel free to reach out. Predicting golf remains a genuinely hard problem — the variance humbles you every week.*
