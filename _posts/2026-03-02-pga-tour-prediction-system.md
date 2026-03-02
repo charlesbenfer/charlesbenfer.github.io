@@ -215,6 +215,8 @@ The model was retroactively evaluated against seven completed 2026 events. Predi
 
 ### Per-Tournament Validation Results
 
+P@K (Precision at K) measures what fraction of the model's top-K picks by predicted win probability were actual top-20 finishers. Winner Rank is where the actual tournament winner appeared in the model's ranked output — lower is better.
+
 | Tournament | P@10 | P@20 | Winner Rank |
 |-----------|------|------|-------------|
 | WM Phoenix Open | 50% | 40% | 3 |
