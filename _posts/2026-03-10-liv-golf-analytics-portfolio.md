@@ -18,8 +18,6 @@ This project started with a simple question: can you reconstruct a meaningful sk
 
 The answer, it turns out, is yes — with some methodological creativity and a lot of careful engineering.
 
-The full system is live at [charlesbenfer.github.io/LIV_Portfolio](https://charlesbenfer.github.io/LIV_Portfolio) and the interactive dashboard is embedded below.
-
 ---
 
 ## The Data Pipeline
