@@ -156,9 +156,9 @@ The variance model was trained on `log(residual²)` from the H02 model using 202
 
 The day-level shared component is real but very small. Within-day correlation in sg_vs_field is nearly zero because the target is already relative to the field average — when conditions are bad for everyone, the field average moves with it, and sg_vs_field stays approximately centered.
 
-**Variance model performance:** Spearman ρ between predicted σ and actual |residual| = 0.058. Statistically significant (p < 10⁻⁸⁰) but weak in practical terms.
+**Variance model performance:** Spearman ρ between predicted σ and actual \|residual\| = 0.058. Statistically significant (p < 10⁻⁸⁰) but weak in practical terms.
 
-The critical calibration issue: training `log(residual²)` with MSE loss estimates E[log(residual²)], which by Jensen's inequality corresponds to the geometric mean of |residual|, not the RMS. The geometric mean is systematically below the RMS when the residual distribution is right-skewed. Without calibration, the simulation ran with σ ≈ 1.5 strokes average versus the true noise of 2.9 strokes — producing win probabilities that were grotesquely overconfident (effective field size dropped from 67.5 to 35.0).
+The critical calibration issue: training `log(residual²)` with MSE loss estimates E[log(residual²)], which by Jensen's inequality corresponds to the geometric mean of \|residual\|, not the RMS. The geometric mean is systematically below the RMS when the residual distribution is right-skewed. Without calibration, the simulation ran with σ ≈ 1.5 strokes average versus the true noise of 2.9 strokes — producing win probabilities that were grotesquely overconfident (effective field size dropped from 67.5 to 35.0).
 
 After adding a calibration factor `k = RMSE_val / sqrt(mean(σ²_pred_val))`, the effective field size snapped back to 67.3 — matching V1 exactly. Brier scores after calibration:
 
