@@ -115,7 +115,7 @@ In practice it hit the same wall. The grouped random effects for player and tour
 
 ### NGBoost
 
-NGBoost takes a different angle: instead of predicting a single `sg_vs_field` value, it fits the full conditional distribution p(y | X) as a Normal(μ, σ²), training separate gradient-boosted trees for the mean and the log-variance. The distributional output is the unique value proposition — player-round-specific uncertainty estimates that the other models can't provide.
+NGBoost takes a different angle: instead of predicting a single `sg_vs_field` value, it fits the full conditional distribution p(y \| X) as a Normal(μ, σ²), training separate gradient-boosted trees for the mean and the log-variance. The distributional output is the unique value proposition — player-round-specific uncertainty estimates that the other models can't provide.
 
 After three rounds of fixes (StandardScaler before fit, max_depth=3 for the base learner, hard clipping of predicted σ to [0.3, 6.0] strokes), NGBoost RMSE was **2.904** — essentially tied with H02. The numerical instability issue is fundamental to the model's architecture: σ = exp(tree_output) is unbounded, and tree models extrapolate badly on out-of-distribution feature combinations. `cum_sg_prior_rounds` was the likely culprit for experienced players in weekend rounds, where the cumulative total can reach values far outside the training distribution.
 
