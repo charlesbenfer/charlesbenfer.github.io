@@ -35,7 +35,7 @@ The models utilize engineered features comparing each pitch to the pitcher's pri
 
 Building on the pitch-level foundation, the second tier employs Long Short-Term Memory (LSTM) neural networks to model game-to-game performance sequences. This component recognizes that pitcher performance exhibits temporal dependencies—a dominant outing often follows periods of mechanical refinement or health improvements that traditional models miss.
 
-The LSTM ingests sequences of five consecutive games, using aggregated pitch scores alongside traditional box score statistics like innings pitched, strikeouts, and run prevention metrics. The network learns to identify patterns in performance trajectories, capturing momentum effects and predicting future RBI production based on recent trends.
+The LSTM ingests sequences of five consecutive games, using aggregated pitch scores alongside traditional box score statistics like innings pitched, strikeouts, and run prevention metrics. The network learns to identify patterns in performance trajectories, capturing momentum effects and predicting future run prevention based on recent trends.
 
 Hyperparameter tuning utilizes Bayesian optimization through Keras Tuner, systematically exploring network architectures, dropout rates, and learning schedules to optimize validation performance. The sequential nature of this modeling layer proves particularly valuable for mid-season prediction updates, as it can incorporate recent performance trends that static models would ignore.
 

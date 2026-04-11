@@ -13,7 +13,7 @@ thumbnail-img: ../assets/img/pitcher_injury_thumbnail.png
 
 ## Project Goals
 
-In late 2024, I embarked on a project to predict pitcher injuries using Bayesian survival analysis. The motivation was clear: pitcher injuries, particularly elbow injuries requiring Tommy John surgery, have reached epidemic proportions in baseball. Teams lose millions of dollars and precious wins when their aces hit the injured list. If we could identify high-risk pitchers before catastrophic injuries occur, teams could make better roster decisions, manage workloads more effectively, and potentially prevent some injuries altogether.
+Over the past few weeks, I embarked on a project to predict pitcher injuries using Bayesian survival analysis. The motivation was clear: pitcher injuries, particularly elbow injuries requiring Tommy John surgery, have reached epidemic proportions in baseball. Teams lose millions of dollars and precious wins when their aces hit the injured list. If we could identify high-risk pitchers before catastrophic injuries occur, teams could make better roster decisions, manage workloads more effectively, and potentially prevent some injuries altogether.
 
 The goal wasn't just to build another injury prediction model - it was to create a production-ready system that could provide actionable insights to teams. This meant not only achieving good predictive performance but also building an interpretable model with uncertainty quantification and a user-friendly interface for exploring risk factors.
 
@@ -31,7 +31,7 @@ Let me explain why Bayesian statistics was perfect for this problem, especially 
 
 Traditional (frequentist) statistics asks: "Given this data, what's the most likely value for our parameters?" It gives you a single best estimate, like "pitchers over 30 have 1.5x higher injury risk."
 
-Bayesian statistics asks a richer question: "Given this data AND what we already know about baseball, what range of values are plausible for our parameters?" Instead of one number, you get a full distribution - maybe that risk factor is most likely 1.5x, but it could plausibly be anywhere from 1.2x to 1.8x.
+Bayesian statistics asks a richer question: "Given this data AND what we already know about baseball, what range of values are plausible for our parameters?" Instead of one number, you get a full distribution - maybe that risk factor is most likely 1.5x, but it could plausibly be anywhere from 1.2x to 1.8x, indicating an increased risk even at the most conservative estimate.
 
 Think of it like scouting a pitcher. A frequentist approach is like watching one game and declaring "this pitcher throws 95 mph." A Bayesian approach is like combining that game with the scouting report, last season's data, and your knowledge that velocity varies - concluding "this pitcher probably throws 93-97 mph, most likely around 95."
 
@@ -93,41 +93,12 @@ Through MCMC (Markov Chain Monte Carlo) sampling - essentially a sophisticated w
 
 The beauty is that we get honest uncertainty. When the model says "Gerrit Cole has 65% injury risk," it can also tell us how confident it is in that assessment based on how similar pitchers have performed.
 
-### The Critical Bug Fix
-
-Early in the project, I encountered a frustrating issue: the model was performing terribly with a concordance index (C-index) of 0.361 - worse than random chance. 
-
-First, let me explain what the C-index measures. Imagine you have two pitchers - one gets injured after 50 games, another after 100 games. A good model should assign higher risk to the pitcher who gets injured sooner. The C-index measures how often the model gets these pairwise comparisons correct. A C-index of 0.5 is random guessing (coin flip), 0.7+ is good, and 1.0 is perfect.
-
-My model scored 0.361 - it was getting the comparisons wrong more often than right! This was deeply puzzling because the model coefficients made sense and the convergence diagnostics looked good.
-
-After extensive debugging, I discovered a critical error in how I was calculating the C-index for AFT models. The bug was subtle but devastating. 
-
-Here's the issue: There are two main types of survival models:
-1. **Cox models**: Model the hazard (instantaneous risk). Higher hazard = shorter survival
-2. **AFT models**: Model the survival time directly. Higher predicted time = longer survival
-
-I was using AFT models but calculating the C-index as if I had Cox models. It's like measuring temperature in Celsius but interpreting it as Fahrenheit - the numbers are completely wrong!
-
-The fix was simple but crucial:
-```python
-# WRONG (Cox-style):
-if risk_scores[i] > risk_scores[j] and times[i] < times[j]:
-    concordant += 1
-
-# CORRECT (AFT-style):
-if risk_scores[i] > risk_scores[j] and times[i] > times[j]:
-    concordant += 1
-```
-
-This single change boosted the C-index from 0.361 to 0.607 - a massive improvement that brought the model into the realm of clinical utility.
-
 ## Model Evolution and Feature Engineering
 
 With the core model working, I embarked on an iterative process to improve predictive performance. Each iteration taught valuable lessons about what works and what doesn't in injury prediction.
 
 ### Iteration 1: Kitchen Sink Approach
-Started with every available feature: age, games played, ERA, innings pitched, WHIP, strikeouts, walks, WAR, and more. The model achieved a C-index of 0.607, but many features had overlapping credible intervals with zero, suggesting overfitting.
+Started with every available feature: current season age with prior season games played, ERA, innings pitched, WHIP, strikeouts, walks, WAR, and more. The model achieved a C-index of 0.607, but many features had overlapping credible intervals with zero, suggesting overfitting.
 
 ### Iteration 2: Feature Selection
 Used LASSO-inspired horseshoe priors to perform automatic feature selection. The model identified seven key features:
@@ -187,7 +158,7 @@ Critically, I validated that these categories showed monotonic injury rates:
 
 ## The Missing Piece: Biomechanical Data
 
-Throughout this project, I kept bumping into a fundamental limitation: I only had performance statistics, not biomechanical data. Modern baseball generates incredible biomechanical metrics:
+Throughout this project, I kept bumping into a fundamental limitation: I only had lagged performance statistics, not biomechanical data. Modern baseball generates incredible biomechanical metrics:
 
 - **Release point consistency**: Variation might indicate mechanical issues
 - **Velocity trends**: Sudden drops often precede injuries
@@ -239,17 +210,15 @@ That 9% improvement over random chance, when applied to roster decisions worth m
 
 This project reinforced several important principles:
 
-1. **Debug systematically**: The concordance calculation bug could have killed the entire project. Always verify your evaluation metrics match your model type.
+1. **Start simple**: Complex models with interactions and non-linearities failed where simple linear models succeeded.
 
-2. **Start simple**: Complex models with interactions and non-linearities failed where simple linear models succeeded.
+2. **Domain knowledge matters**: Understanding baseball helped identify which features made sense and which results were suspicious.
 
-3. **Domain knowledge matters**: Understanding baseball helped identify which features made sense and which results were suspicious.
+3. **Data quality beats model complexity**: Better features (biomechanical data) would likely improve performance more than any modeling trick.
 
-4. **Data quality beats model complexity**: Better features (biomechanical data) would likely improve performance more than any modeling trick.
+4. **Validate ruthlessly**: Internal cross-validation isn't enough - true holdout testing on future data is essential.
 
-5. **Validate ruthlessly**: Internal cross-validation isn't enough - true holdout testing on future data is essential.
-
-6. **Make it usable**: The best model in the world is worthless if stakeholders can't use it. The Streamlit dashboard makes insights accessible.
+5. **Make it usable**: The best model in the world is worthless if stakeholders can't use it. The Streamlit dashboard makes insights accessible.
 
 ## Future Directions
 
