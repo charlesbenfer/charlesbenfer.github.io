@@ -18,7 +18,7 @@ Agriculture stands at a critical crossroads. With global population projected to
 
 This project tackles one of agriculture's most complex prediction problems: understanding how genetic makeup and environmental conditions interact to determine crop characteristics. Working with Bayer Corporation, we developed machine learning models to predict eight key phenotypic properties of maize using genetic markers and environmental data spanning multiple growing seasons.
 
-The fundamental question driving this work: Can we accurately model the relationship $ P = f(G, E) $, where phenotype outcomes result from the interaction between genetic information and environmental factors?
+The fundamental question driving this work: Can we accurately model the relationship $P = f(G, E)$, where phenotype outcomes result from the interaction between genetic information and environmental factors?
 
 ## Dataset and Methodology
 
